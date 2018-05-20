@@ -9,10 +9,36 @@ angular.module('booking-admin')
 				component: 'myHome'
 			})
 			.state({
+				name: 'userAuth',
+				url: '/user-auth',
+				component: 'myUserAuth'
+			})
+			.state({
 				name: 'home.lodging',
 				url: '^/lodging',
 				component: 'mylodging'
 			})
+			.state({
+				name: 'home.edit_user',
+				url: '^/edit_user',
+				component: 'myEditUser'
+			})
+			.state({
+				name: 'home.pending_agents',
+				url: '^/pending_agents',
+				component: 'myPendingAgents'
+			})
+			.state({
+				name: 'home.comments',
+				url: '^/comments',
+				component: 'myComments'
+			})
+			.state({
+				name: 'home.catalogue',
+				url: '^/catalogue',
+				component: 'myCatalogue'
+			})
+			
 			
 			.state({
 				name: 'error',
