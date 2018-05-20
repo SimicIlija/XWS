@@ -6,7 +6,7 @@ angular.module('core.user')
 			return $http.post('/api/user-auth/', data);
 		};
 		this.logIn = (data) => {
-			return $http.put('/api/user-auth/', data);
+			return $http.put('http://localhost:8080/api/user-auth/', data);
 		};
 		this.logOut = () => {
 			return $http.delete('/api/user-auth/');

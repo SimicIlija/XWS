@@ -3,5 +3,6 @@
 angular.module('home', [
 	'home.sidebar',
 	'reservation_list',
-	'search'
+	'search',
+	'userAuth'
 ]);

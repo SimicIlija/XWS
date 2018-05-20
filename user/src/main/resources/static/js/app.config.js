@@ -14,6 +14,11 @@ angular.module('booking-admin')
 				component: 'mylodging'
 			})
 			.state({
+				name: 'userAuth',
+				url: '/user-auth',
+				component: 'myUserAuth'
+			})
+			.state({
 				name: 'home.reservations',
 				url: '^/reservations/{type:future|history}',
 				component: 'myReservationList'
