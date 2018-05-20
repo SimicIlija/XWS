@@ -1,37 +1,13 @@
 <ul class="nav flex-column">
 	<li class="nav-item">
 		<a class="nav-link"
-			ui-sref="home.places({placeType: 'theater'})"
+			ui-sref="home.search"
 			ui-sref-active="active">
 				<i class="fas fa-building"></i>
-				Theaters
+				Search Lodging
 		</a>
 	</li>
 	<li class="nav-item">
-		<a class="nav-link"
-			ui-sref="home.places({placeType: 'cinema'})"
-			ui-sref-active="active">
-				<i class="fas fa-film"></i>
-				Cinemas
-		</a>
-	</li>
-	<li ng-if="$root.user.userType == 'SYSADMIN'" class="nav-item">
-		<a class="nav-link"
-			ui-sref="home.addPlace"
-			ui-sref-active="active">
-				<i class="fas fa-plus"></i>
-				Add place
-		</a>
-	</li>
-	<li ng-if="$root.user.userType == 'SYSADMIN'" class="nav-item">
-		<a class="nav-link"
-			ui-sref="home.changeRole"
-			ui-sref-active="active">
-				<i class="fas fa-edit"></i>
-				Change users role
-		</a>
-	</li>
-	<li class="nav-item" ng-if="$root.user">
 		<a class="nav-link"
 			ui-sref="home.reservations({type: 'future'})"
 			ui-sref-active="active">
@@ -39,7 +15,7 @@
 				Reservations
 		</a>
 	</li>
-	<li class="nav-item" ng-if="$root.user">
+	<li class="nav-item" >
 		<a class="nav-link"
 			ui-sref="home.reservations({type: 'history'})"
 			ui-sref-active="active">

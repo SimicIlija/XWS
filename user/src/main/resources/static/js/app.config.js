@@ -13,6 +13,16 @@ angular.module('booking-admin')
 				url: '^/lodging',
 				component: 'mylodging'
 			})
+			.state({
+				name: 'home.reservations',
+				url: '^/reservations/{type:future|history}',
+				component: 'myReservationList'
+			})
+			.state({
+				name: 'home.search',
+				url: '^/search',
+				component: 'mySearch'
+			})
 			
 			.state({
 				name: 'error',
