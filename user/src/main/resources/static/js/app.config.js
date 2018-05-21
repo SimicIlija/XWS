@@ -1,7 +1,10 @@
 'use strict';
 
 angular.module('booking-admin')
-	.config(function($stateProvider, $urlRouterProvider) {
+	.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
+		
+		$httpProvider.defaults.withCredentials = true;
+		
 		$stateProvider
 			.state({
 				name: 'home',
@@ -48,3 +51,4 @@ angular.module('booking-admin')
 				$rootScope.user = null;
 			});
 	});
+

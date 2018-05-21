@@ -3,7 +3,7 @@
 angular.module('core.user')
 	.service('UserAuthService', function($http) {
 		
-		this.prefix = 'http://localhost:8080'
+		this.prefix = 'http://localhost:8080';
 		this.register = (data) => {
 			return $http.post(this.prefix + '/api/user-auth/', data);
 		};

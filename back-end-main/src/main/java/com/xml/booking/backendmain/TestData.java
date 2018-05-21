@@ -42,7 +42,7 @@ public class TestData {
 		userService.register(user4);
 		
 		
-		User user7 = new User("sys@me", "qweqwe", "Sheev", "Palpatine", "Naboo", null);
+		User user7 = new User("sys@sys", "qweqwe", "Sheev", "Palpatine", "Naboo", null);
 		user7.setUserType(UserType.SYSADMIN);
 		user7.setEmailConfirmed(true);
 		userService.register(user7);
