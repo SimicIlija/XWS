@@ -14,8 +14,7 @@ angular.module('home.catalogue')
 			
 			
 			this.deleteCatalog = (catalog) => {
-				
-				
+								
 				CatalogService.deleteCatalog(catalog.id)
 				.then( (response) => {
 					
