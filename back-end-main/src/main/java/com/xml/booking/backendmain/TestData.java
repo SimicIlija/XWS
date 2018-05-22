@@ -1,5 +1,8 @@
 package com.xml.booking.backendmain;
 
+import java.util.Arrays;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -61,6 +64,12 @@ public class TestData {
 		catalogService.add(c25);
 		catalogService.add(c26);
 		
+		Catalog n;
+		List<String> additionlPlaces = Arrays.asList("Parking", "WiFi", "Breakfast","Half board", "Board", "TV","Mini kitchen/kitchen","Private bathroom");
+		for(int i=0 ;i < additionlPlaces.size(); i++) {
+			n = new Catalog(OptionType.ADDITIONAL_SERVICES, additionlPlaces.get(i));
+			catalogService.add(n);
+		}
 		
 		
 	}

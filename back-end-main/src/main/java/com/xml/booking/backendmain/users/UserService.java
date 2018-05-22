@@ -15,5 +15,7 @@ public interface UserService {
 	User logIn(User user);
 
 	User edit(Long id, User user);
+	
+	User delete(Long id);
 
 }

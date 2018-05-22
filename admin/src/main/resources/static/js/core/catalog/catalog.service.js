@@ -14,7 +14,7 @@ angular.module('core.catalog')
 		this.add = (data) => {
 			return $http.post(this.prefix + '/api/catalog/', data);
 		};
-		this.deleteProjection = (id) =>{
+		this.deleteCatalog = (id) =>{
 			return $http.delete(this.prefix + '/api/catalog/'+ id);
 		};
 	});

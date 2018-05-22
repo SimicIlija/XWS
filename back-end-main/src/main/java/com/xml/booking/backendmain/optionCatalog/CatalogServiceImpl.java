@@ -35,11 +35,13 @@ public class CatalogServiceImpl implements CatalogService{
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public Catalog add(Catalog catalog) {
 		return catalogRepository.save(catalog);
 	}
 
 	@Override
+	@Transactional(readOnly = false)
 	public Catalog delete(Long id) {
 		Catalog catalog = findOne(id);
 		if(catalog == null)

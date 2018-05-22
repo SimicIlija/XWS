@@ -1,1 +1,12 @@
-<h1>Edit users</h1>
+<div class=" justify-content-md-left">
+  <h1>Edit users</h1>
+
+  <div ng-repeat="user in $ctrl.users">
+  	<div class="form-group row" ng-if='user.userType == "VISITOR" '> 
+  		<span>&nbsp&nbsp {{user.email}}</span>&nbsp&nbsp&nbsp
+  		<button ng-click="$ctrl.deleteUser(user)" class="btn btn-custom">Delete</button>&nbsp&nbsp&nbsp
+  		<button ng-click="$ctrl.block(user)" class="btn btn-custom">Block</button>
+  	</div>
+  </div>
+  
+</div>

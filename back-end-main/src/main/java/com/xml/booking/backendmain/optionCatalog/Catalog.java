@@ -26,7 +26,7 @@ public class Catalog {
 	
 	private String value;
 	
-	Catalog(){}
+	public Catalog(){}
 
 	public Catalog( OptionType type, String value) {
 		super();

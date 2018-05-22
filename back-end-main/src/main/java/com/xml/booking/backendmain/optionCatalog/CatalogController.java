@@ -72,6 +72,7 @@ public class CatalogController {
 		Catalog catalog = catalogService.findOne(id);
 		if(catalog == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		catalogService.delete(catalog.getId());
 		return new ResponseEntity<>(catalog,HttpStatus.OK);
 	}
 	

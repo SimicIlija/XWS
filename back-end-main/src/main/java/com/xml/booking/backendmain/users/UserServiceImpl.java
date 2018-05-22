@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xml.booking.backendmain.optionCatalog.Catalog;
+
 @Transactional(readOnly = true)
 @Service
 public class UserServiceImpl implements UserService {
@@ -72,6 +74,21 @@ public class UserServiceImpl implements UserService {
 		
 		
 		return userRepository.save(user);
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public User delete(Long id) {
+		User user= findOne(id);
+		if(user == null)
+			return null;
+		try {
+			userRepository.delete(user);
+		}catch(Exception e){
+			System.out.println("Could not delete User element");
+			return null;
+		}
+		return user;
 	}
 
 

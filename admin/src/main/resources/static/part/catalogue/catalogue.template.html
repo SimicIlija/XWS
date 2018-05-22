@@ -1,10 +1,10 @@
 <div class=" justify-content-md-left">
-  <h2>Type of lodging</h2>
+  <h1>Type of lodging</h1>
 
-  <div ng-repeat="item in ['cabbage', 'umbrella', 'steam train']">
-  	<div class="form-group row" > <!-- ng-if='item.type == "TYPE"' -->
-  		<span>&nbsp&nbsp {{item}}</span>&nbsp&nbsp&nbsp
-  		<button ng-click="doSomeStuff(item)" class="btn btn-custom">Delete</button>
+  <div ng-repeat="catalog in $ctrl.catalogs">
+  	<div class="form-group row" ng-if='catalog.type == "TYPE"' > 
+  		<span>&nbsp&nbsp {{catalog.value}}</span>&nbsp&nbsp&nbsp
+  		<button ng-click="$ctrl.deleteCatalog(catalog)" class="btn btn-custom">Delete</button>
   	</div>
   </div>
   <h3>Add new Type</h3>
@@ -16,12 +16,75 @@
 			id="nameInput"
 			class="form-group form-control"
 			placeholder="New Type"
-			ng-model="$ctrl.projection.name"
+			ng-model="$ctrl.valueT"
 			ng-required="true"
 			style="width: 250px;"/>&nbsp&nbsp&nbsp
 			
 		<button class="btn btn-custom"
-		ng-click="typeForm.$valid && $ctrl.sendType()">Send
+		ng-click="typeForm.$valid && $ctrl.send('TYPE')">Send
+	</button>
+	</div>
+	
+  </form>
+  
+</div>
+
+<div class=" justify-content-md-left">
+  <h1>Category of lodging</h1>
+
+  <div ng-repeat="catalog in $ctrl.catalogs">
+  	<div class="form-group row" ng-if='catalog.type == "CATEGORY"' > 
+  		<span>&nbsp&nbsp {{catalog.value}}</span>&nbsp&nbsp&nbsp
+  		<button ng-click="$ctrl.deleteCatalog(catalog)" class="btn btn-custom">Delete</button>
+  	</div>
+  </div>
+  <h3>Add new Category</h3>
+  <form name="categoryForm" >
+  
+  	<div class="form-group row">
+    	<label for="nameInput">New Category:</label>&nbsp&nbsp&nbsp
+		<input type="text"
+			id="nameInput"
+			class="form-group form-control"
+			placeholder="New category"
+			ng-model="$ctrl.valueC"
+			ng-required="true"
+			style="width: 250px;"/>&nbsp&nbsp&nbsp
+			
+		<button class="btn btn-custom"
+		ng-click="categoryForm.$valid && $ctrl.send('CATEGORY')">Send
+	</button>
+	</div>
+	
+  </form>
+  
+</div>
+
+
+<div class=" justify-content-md-left">
+  <h1>Additional services</h1>
+
+  <div ng-repeat="catalog in $ctrl.catalogs">
+  	<div class="form-group row" ng-if='catalog.type == "ADDITIONAL_SERVICES"' > 
+  		<span>&nbsp&nbsp {{catalog.value}}</span>&nbsp&nbsp&nbsp
+  		<button ng-click="$ctrl.deleteCatalog(catalog)" class="btn btn-custom">Delete</button>
+  	</div>
+  </div>
+  <h3>Add new Additional service</h3>
+  <form name="AdditionalForm" >
+  
+  	<div class="form-group row">
+    	<label for="nameInput">New Additional service:</label>&nbsp&nbsp&nbsp
+		<input type="text"
+			id="nameInput"
+			class="form-group form-control"
+			placeholder="New Additional service"
+			ng-model="$ctrl.valueA"
+			ng-required="true"
+			style="width: 250px;"/>&nbsp&nbsp&nbsp
+			
+		<button class="btn btn-custom"
+		ng-click="AdditionalForm.$valid && $ctrl.send('ADDITIONAL_SERVICES')">Send
 	</button>
 	</div>
 	
