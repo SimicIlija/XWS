@@ -29,4 +29,5 @@ dbtest*
 META-INF/
 nano.save
 img/
+dbtest.mv.db
 

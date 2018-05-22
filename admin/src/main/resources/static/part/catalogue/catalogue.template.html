@@ -1,1 +1,30 @@
-<h1>catalogue</h1>
+<div class=" justify-content-md-left">
+  <h2>Type of lodging</h2>
+
+  <div ng-repeat="item in ['cabbage', 'umbrella', 'steam train']">
+  	<div class="form-group row" > <!-- ng-if='item.type == "TYPE"' -->
+  		<span>&nbsp&nbsp {{item}}</span>&nbsp&nbsp&nbsp
+  		<button ng-click="doSomeStuff(item)" class="btn btn-custom">Delete</button>
+  	</div>
+  </div>
+  <h3>Add new Type</h3>
+  <form name="typeForm" >
+  
+  	<div class="form-group row">
+    	<label for="nameInput">New type:</label>&nbsp&nbsp&nbsp
+		<input type="text"
+			id="nameInput"
+			class="form-group form-control"
+			placeholder="New Type"
+			ng-model="$ctrl.projection.name"
+			ng-required="true"
+			style="width: 250px;"/>&nbsp&nbsp&nbsp
+			
+		<button class="btn btn-custom"
+		ng-click="typeForm.$valid && $ctrl.sendType()">Send
+	</button>
+	</div>
+	
+  </form>
+  
+</div>

@@ -3,9 +3,14 @@
 angular.module('home.catalogue')
 	.component('myCatalogue', {
 		templateUrl: '/part/catalogue/catalogue.template.html',
-		controller: function( $rootScope, $state) {
+		controller: function( $rootScope, $state, CatalogService) {
 			
-
+			CatalogService.getAll()
+			.then( (response) => {
+				this.catalogs = response.data;
+			}, () => {
+				this.catalogs = null;
+			});
 			
 		}
 	});
