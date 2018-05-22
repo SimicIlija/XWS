@@ -90,6 +90,25 @@ public class UserServiceImpl implements UserService {
 		}
 		return user;
 	}
+	
+	@Override
+	@Transactional(readOnly = false)
+	public User block_unblock(Long id) {
+		User user= findOne(id);
+		if(user == null)
+			return null;
+		if(user.isBlocked())
+			user.setBlocked(false);
+		else 
+			user.setBlocked(true);
+		try {
+			userRepository.save(user);
+		}catch(Exception e){
+			System.out.println("Could not block_ublock User");
+			return null;
+		}
+		return user;
+	}
 
 
 }

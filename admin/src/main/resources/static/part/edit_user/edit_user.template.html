@@ -5,7 +5,7 @@
   	<div class="form-group row" ng-if='user.userType == "VISITOR" '> 
   		<span>&nbsp&nbsp {{user.email}}</span>&nbsp&nbsp&nbsp
   		<button ng-click="$ctrl.deleteUser(user)" class="btn btn-custom">Delete</button>&nbsp&nbsp&nbsp
-  		<button ng-click="$ctrl.block(user)" class="btn btn-custom">Block</button>
+  		<button ng-click="$ctrl.block_unblock(user)" class="btn btn-custom">Blocked: {{user.blocked}}</button>
   	</div>
   </div>
   

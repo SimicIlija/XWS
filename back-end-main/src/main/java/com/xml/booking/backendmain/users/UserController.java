@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -40,6 +41,20 @@ public class UserController {
 		if(user == null)
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		userService.delete(user.getId());
+		return new ResponseEntity<>(user,HttpStatus.OK);
+	}
+	
+	@PutMapping("/block_unblock/{id:\\d+}")
+	public ResponseEntity<User> block_unblock (@PathVariable Long id)
+	{
+		User user = (User) session.getAttribute("user");
+		if(user == null || !user.getUserType().equals(UserType.SYSADMIN))
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+		
+		user = userService.findOne(id);
+		if(user == null)
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		user = userService.block_unblock(user.getId());
 		return new ResponseEntity<>(user,HttpStatus.OK);
 	}
 }

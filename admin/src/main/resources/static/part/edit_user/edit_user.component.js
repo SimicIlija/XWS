@@ -28,5 +28,21 @@ angular.module('home.edit_user')
 				});
 			};
 			
+			this.block_unblock = (user) => {
+				
+				UserService.block(user.id)
+				.then( (response) => {
+					
+					this.users.forEach(function(user) {
+						if(user.id == response.data.id)
+							user.blocked = response.data.blocked
+					});
+					
+				}, () => {
+					alert('Block/unblock failed');
+					
+				});
+			};
+			
 		}
 	});

@@ -18,4 +18,5 @@ public interface UserService {
 	
 	User delete(Long id);
 
+	User block_unblock(Long id);
 }

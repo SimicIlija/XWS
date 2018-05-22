@@ -9,7 +9,7 @@ angular.module('core.user')
 			return $http.get(this.prefix + '/api/users/');
 		};
 		this.block = (id) => {
-			return $http.put(this.prefix + '/api/users/', data);
+			return $http.put(this.prefix + '/api/users/block_unblock/' + id);
 		};
 		this.deleteUser = (id) =>{
 			return $http.delete(this.prefix + '/api/users/'+ id);
