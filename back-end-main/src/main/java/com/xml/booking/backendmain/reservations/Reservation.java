@@ -14,10 +14,10 @@ public class Reservation {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private Lodging lodging;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
     private Date startDate;
