@@ -1,14 +1,5 @@
 package com.xml.booking.backendmain;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
-import javax.annotation.PostConstruct;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
-
 import com.xml.booking.backendmain.comment.Comment;
 import com.xml.booking.backendmain.comment.CommentService;
 import com.xml.booking.backendmain.lodging.Lodging;
@@ -16,9 +7,17 @@ import com.xml.booking.backendmain.lodging.LodgingService;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
 import com.xml.booking.backendmain.optionCatalog.CatalogService;
 import com.xml.booking.backendmain.optionCatalog.OptionType;
+import com.xml.booking.backendmain.place.Place;
+import com.xml.booking.backendmain.place.PlaceService;
 import com.xml.booking.backendmain.users.User;
 import com.xml.booking.backendmain.users.UserService;
 import com.xml.booking.backendmain.users.UserType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import javax.annotation.PostConstruct;
+import java.util.Arrays;
+import java.util.List;
 
 
 @Component
@@ -32,6 +31,8 @@ public class TestData {
 	private LodgingService lodgingService;
 	@Autowired
 	private CommentService commentService;
+	@Autowired
+	private PlaceService placeService;
 	@PostConstruct
 	private void init() {
 //		if(userService.findOne(1l) != null)
@@ -78,11 +79,11 @@ public class TestData {
 			n[i] = new Catalog(OptionType.ADDITIONAL_SERVICES, additionlPlaces.get(i));
 			catalogService.add(n[i]);
 		}
-		
-		
+
+		Place place = placeService.addNew("Novi Sad");
 		
 		List<Catalog> list1 = Arrays.asList(n[0],n[1],n[2]);
-		Lodging l1 = new Lodging(c11, c21, list1,"Lodging 1");
+		Lodging l1 = new Lodging(c11, c21, list1, "Lodging 1", place);
 		lodgingService.add(l1);
 		
 		Comment c1 = new Comment(user1, l1, "First comment", (long)1527026814, false);
