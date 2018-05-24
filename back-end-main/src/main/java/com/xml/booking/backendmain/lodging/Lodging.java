@@ -1,12 +1,13 @@
 package com.xml.booking.backendmain.lodging;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
-import com.xml.booking.backendmain.place.Place;
 import com.xml.booking.backendmain.reservations.Reservation;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -26,11 +27,9 @@ public class Lodging {
     @ManyToOne(fetch = FetchType.EAGER)
     private Catalog catagoty;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    private Place place;
-
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "lodging_id")
+    @JsonIgnore
     private List<Reservation> reservations;
 
     private String name;
@@ -44,16 +43,16 @@ public class Lodging {
 
 
     public Lodging() {
+        reservations = new ArrayList<>();
     }
 
 
-    public Lodging(Catalog type, Catalog catagoty, List<Catalog> additionalServices, String name, Place place) {
+    public Lodging(Catalog type, Catalog catagoty, List<Catalog> additionalServices, String name) {
         super();
         this.type = type;
         this.catagoty = catagoty;
         this.additionalServices = additionalServices;
         this.name = name;
-        this.place = place;
     }
 
     public Long getId() {
@@ -102,14 +101,6 @@ public class Lodging {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Place getPlace() {
-        return place;
-    }
-
-    public void setPlace(Place place) {
-        this.place = place;
     }
 
     public List<Reservation> getReservations() {

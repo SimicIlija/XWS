@@ -1,5 +1,6 @@
 package com.xml.booking.backendmain.users;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.backendmain.reservations.Reservation;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -60,8 +62,9 @@ public class User {
     @JsonProperty(access = Access.READ_ONLY)
     private int points = 0;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
+    @JsonIgnore
     private List<Reservation> reservations;
 
     private boolean blocked;
@@ -71,6 +74,7 @@ public class User {
     public User() {
         this.blocked = false;
         this.deleted = false;
+        reservations = new ArrayList<>();
     }
 
     public User(String email,

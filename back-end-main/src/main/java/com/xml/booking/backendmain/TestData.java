@@ -83,9 +83,11 @@ public class TestData {
 		Place place = placeService.addNew("Novi Sad");
 		
 		List<Catalog> list1 = Arrays.asList(n[0],n[1],n[2]);
-		Lodging l1 = new Lodging(c11, c21, list1, "Lodging 1", place);
+		Lodging l1 = new Lodging(c11, c21, list1, "Lodging 1");
 		lodgingService.add(l1);
-		
+		place.getLodgings().add(l1);
+		placeService.update(place);
+
 		Comment c1 = new Comment(user1, l1, "First comment", (long)1527026814, false);
 		Comment c2 = new Comment(user2, l1, "Second comment", (long)1527026814, false);
 		commentService.add(c1);

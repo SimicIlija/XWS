@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xml.booking.backendmain.lodging.Lodging;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,11 +16,12 @@ public class Place {
 
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "place_id")
     private List<Lodging> lodgings;
 
     public Place() {
+        lodgings = new ArrayList<>();
     }
 
     public Long getId() {

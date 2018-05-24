@@ -18,4 +18,8 @@ public class PlaceService {
         place = placeRepository.save(place);
         return place;
     }
+
+    public void update(Place place) {
+        placeRepository.save(place);
+    }
 }
