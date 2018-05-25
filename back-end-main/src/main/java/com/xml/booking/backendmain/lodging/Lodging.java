@@ -1,12 +1,11 @@
 package com.xml.booking.backendmain.lodging;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
-import com.xml.booking.backendmain.reservations.Reservation;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,12 +26,22 @@ public class Lodging {
     @ManyToOne(fetch = FetchType.EAGER)
     private Catalog catagoty;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "lodging_id")
-    @JsonIgnore
-    private List<Reservation> reservations;
-
     private String name;
+
+    private String location;
+
+    private String textDescription;
+
+    @Min(0)
+    private int numberOfGuests;
+
+    @ElementCollection
+    private List<String> imageUrls = new ArrayList<>();
+
+    @ElementCollection
+    //@Size(min=12, max=12)
+    private List<Double> prices = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(
@@ -43,16 +52,19 @@ public class Lodging {
 
 
     public Lodging() {
-        reservations = new ArrayList<>();
     }
 
 
-    public Lodging(Catalog type, Catalog catagoty, List<Catalog> additionalServices, String name) {
+    public Lodging(Catalog type, Catalog catagoty, List<Catalog> additionalServices,
+                   String name, String location, String textDescription, int numberOfGuests) {
         super();
         this.type = type;
         this.catagoty = catagoty;
         this.additionalServices = additionalServices;
         this.name = name;
+        this.location = location;
+        this.textDescription = textDescription;
+        this.numberOfGuests = numberOfGuests;
     }
 
     public Long getId() {
@@ -103,11 +115,43 @@ public class Lodging {
         this.name = name;
     }
 
-    public List<Reservation> getReservations() {
-        return reservations;
+    public String getLocation() {
+        return location;
     }
 
-    public void setReservations(List<Reservation> reservations) {
-        this.reservations = reservations;
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public String getTextDescription() {
+        return textDescription;
+    }
+
+    public void setTextDescription(String textDescription) {
+        this.textDescription = textDescription;
+    }
+
+    public int getNumberOfGuests() {
+        return numberOfGuests;
+    }
+
+    public void setNumberOfGuests(int numberOfGuests) {
+        this.numberOfGuests = numberOfGuests;
+    }
+
+    public List<String> getImageUrls() {
+        return imageUrls;
+    }
+
+    public void setImageUrls(List<String> imageUrls) {
+        this.imageUrls = imageUrls;
+    }
+
+    public List<Double> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<Double> prices) {
+        this.prices = prices;
     }
 }

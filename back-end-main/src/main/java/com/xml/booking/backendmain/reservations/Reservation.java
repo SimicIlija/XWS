@@ -15,9 +15,11 @@ public class Reservation {
     private Long id;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "lodging_id")
     private Lodging lodging;
 
     @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
     private User user;
 
     private Date startDate;

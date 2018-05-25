@@ -7,8 +7,6 @@ import com.xml.booking.backendmain.lodging.LodgingService;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
 import com.xml.booking.backendmain.optionCatalog.CatalogService;
 import com.xml.booking.backendmain.optionCatalog.OptionType;
-import com.xml.booking.backendmain.place.Place;
-import com.xml.booking.backendmain.place.PlaceService;
 import com.xml.booking.backendmain.reservations.Reservation;
 import com.xml.booking.backendmain.reservations.ReservationService;
 import com.xml.booking.backendmain.users.User;
@@ -31,16 +29,15 @@ public class TestData {
     private final CatalogService catalogService;
     private final LodgingService lodgingService;
     private final CommentService commentService;
-    private final PlaceService placeService;
+
     private final ReservationService reservationService;
 
     @Autowired
-    public TestData(UserService userService, CatalogService catalogService, LodgingService lodgingService, CommentService commentService, PlaceService placeService, ReservationService reservationService) {
+    public TestData(UserService userService, CatalogService catalogService, LodgingService lodgingService, CommentService commentService, ReservationService reservationService) {
         this.userService = userService;
         this.catalogService = catalogService;
         this.lodgingService = lodgingService;
         this.commentService = commentService;
-        this.placeService = placeService;
         this.reservationService = reservationService;
     }
 
@@ -91,13 +88,10 @@ public class TestData {
             catalogService.add(n[i]);
         }
 
-        Place place = placeService.addNew("Novi Sad");
-
         List<Catalog> list1 = Arrays.asList(n[0], n[1], n[2]);
-        Lodging l1 = new Lodging(c11, c21, list1, "Lodging 1");
+        Lodging l1 = new Lodging(c11, c21, list1, "Lodging 1",
+                "Novi Sad", "Opis objekta", 5);
         lodgingService.add(l1);
-        place.getLodgings().add(l1);
-        placeService.update(place);
 
         Reservation reservation = new Reservation();
         reservation.setLodging(l1);
