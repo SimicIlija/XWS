@@ -1,5 +1,7 @@
 package com.xml.booking.backendmain.reservations;
 
+import com.xml.booking.backendmain.exceptions.AuthException;
+import com.xml.booking.backendmain.users.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -17,9 +20,12 @@ import java.util.List;
 public class ReservationController {
     private final ReservationService reservationService;
 
+    private final HttpSession session;
+
     @Autowired
-    public ReservationController(ReservationService reservationService) {
+    public ReservationController(ReservationService reservationService, HttpSession session) {
         this.reservationService = reservationService;
+        this.session = session;
     }
 
     @RequestMapping(method = RequestMethod.GET,
@@ -33,8 +39,12 @@ public class ReservationController {
             produces = MediaType.APPLICATION_JSON_VALUE,
             consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> addNewReservation(@Valid @RequestBody ReservationDto reservationDto) {
-        //TODO : Radi proveru validnosti podataka,
-        //TODO: da li je slobodan termin i dodaj potvrdu u rezervaciju
-        return null;
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            throw new AuthException("Login first");
+        }
+
+        Reservation reservation = reservationService.addNew(reservationDto, user);
+        return new ResponseEntity<Object>(reservation, HttpStatus.CREATED);
     }
 }

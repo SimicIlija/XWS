@@ -7,8 +7,6 @@ import java.util.Date;
 public class ReservationDto {
     @Min(0)
     private long lodgingId;
-    @Min(0)
-    private long userId;
     @NotNull
     private Date startDate;
     @NotNull
@@ -23,14 +21,6 @@ public class ReservationDto {
 
     public void setLodgingId(long lodgingId) {
         this.lodgingId = lodgingId;
-    }
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
     public Date getStartDate() {
@@ -48,4 +38,9 @@ public class ReservationDto {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    public boolean checkInputDates() {
+        return endDate.after(startDate);
+    }
+
 }

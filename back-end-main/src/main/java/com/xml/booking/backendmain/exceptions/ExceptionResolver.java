@@ -18,4 +18,9 @@ public class ExceptionResolver {
     public ResponseEntity<ErrorDto> notFoundExp(NotFoundException exception) {
         return new ResponseEntity<>(new ErrorDto(exception.getMessage()), HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(AuthException.class)
+    public ResponseEntity<ErrorDto> authExp(AuthException exception) {
+        return new ResponseEntity<>(new ErrorDto(exception.getMessage()), HttpStatus.UNAUTHORIZED);
+    }
 }

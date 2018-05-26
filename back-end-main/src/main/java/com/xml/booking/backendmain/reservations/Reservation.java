@@ -68,4 +68,15 @@ public class Reservation {
     public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
+
+    /**
+     * Proverava poklapanja datuma,
+     * vraca tacno ako se neki od datuma Dto nalazi izmedju start i end date
+     * hoce da rezervise na vec postojecu rezervaciju
+     */
+    public boolean checkDates(ReservationDto dto) {
+        boolean start = startDate.before(dto.getStartDate()) && endDate.after(dto.getStartDate());
+        boolean end = startDate.before(dto.getEndDate()) && endDate.after(dto.getEndDate());
+        return start || end;
+    }
 }
