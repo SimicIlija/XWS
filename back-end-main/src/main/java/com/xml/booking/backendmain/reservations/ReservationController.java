@@ -25,6 +25,9 @@ public class ReservationController {
         this.session = session;
     }
 
+    /**
+     * Only for testing purposes
+     */
     @RequestMapping(method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAll() {
@@ -54,5 +57,16 @@ public class ReservationController {
         }
         reservationService.cancelResrvation(id, user);
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/personal", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getMyReservationsList() {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            throw new AuthException("Login first");
+        }
+        List<Reservation> reservations = reservationService.findByUser(user);
+        return new ResponseEntity<Object>(reservations, HttpStatus.OK);
     }
 }
