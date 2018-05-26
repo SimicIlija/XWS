@@ -1,5 +1,6 @@
 package com.xml.booking.backendmain.reservations;
 
+import com.xml.booking.backendmain.exceptions.AuthException;
 import com.xml.booking.backendmain.exceptions.BadRequestException;
 import com.xml.booking.backendmain.exceptions.NotFoundException;
 import com.xml.booking.backendmain.lodging.Lodging;
@@ -54,5 +55,15 @@ public class ReservationService {
         reservation.setEndDate(reservationDto.getEndDate());
         reservation.setStartDate(reservationDto.getStartDate());
         return reservationRepository.save(reservation);
+    }
+
+    public void cancelResrvation(long id, User user) {
+        Reservation reservation = reservationRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Reservation not found"));
+        System.out.println(user.getEmail());
+        if (!reservation.getUser().equals(user)) {
+            throw new AuthException("User cannot cancel other users reservation");
+        }
+        reservationRepository.delete(reservation);
     }
 }
