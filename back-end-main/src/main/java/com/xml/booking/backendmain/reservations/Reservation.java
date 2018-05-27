@@ -79,4 +79,10 @@ public class Reservation {
         boolean end = startDate.before(dto.getEndDate()) && endDate.after(dto.getEndDate());
         return start || end;
     }
+
+    public boolean checkIfNotAvailable(Date newStartDate, Date newEndDate) {
+        boolean start = startDate.before(newStartDate) && endDate.after(newStartDate);
+        boolean end = startDate.before(newEndDate) && endDate.after(newEndDate);
+        return start || end;
+    }
 }
