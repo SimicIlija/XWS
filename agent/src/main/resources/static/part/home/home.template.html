@@ -1,0 +1,11 @@
+<div class="row" ng-if="$root.user">
+	<my-sidebar class="col-md-3 col-xl-2 collapse nav-toggled d-md-block">
+	</my-sidebar>
+	<div class="col-md m-md-3">
+		<ui-view></ui-view>
+	</div>
+</div>
+
+<div class="row justify-content-md-center" ng-if="!$root.user">
+	<my-login class="col-md-4 panel"></my-login>
+</div>

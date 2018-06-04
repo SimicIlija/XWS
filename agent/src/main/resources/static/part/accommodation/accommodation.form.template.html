@@ -1,0 +1,31 @@
+<form name="accommodation">
+	<input type="text" class="form-group form-control" placeholder="Name*" ng-model="$ctrl.accommodation.name" required autofocus/>
+	<input type="text" class="form-group form-control" placeholder="Address*" ng-model="$ctrl.accommodation.address" required/>
+	<select class="form-group form-control" ng-model="$ctrl.type" ng-options="x.value for x in $ctrl.types" required>
+		<option value="">-- Choose type* --</option>
+	</select>
+	<select class="form-group form-control" ng-model="$ctrl.category" ng-options="x.value for x in $ctrl.categories" required>
+		<option value="">-- Choose category* --</option>
+	</select>
+	<isteven-multi-select class="form-group form-control" input-model="$ctrl.add_services" output-model="$ctrl.additionalServices" button-label="value" item-label="value" tick-property="ticked"></isteven-multi-select>
+	<textarea placeholder="Description*" class="form-group form-control" rows="5" ng-model="$ctrl.accommodation.description" required></textarea>
+	<input class="form-group form-control" id="images" type="file" name="file" accept=".jpg" multiple/>
+	<label>Number of beds:</label>
+	<input class="form-group form-control" type="number" step="1" min="1" ng-model="$ctrl.accommodation.badNumber" required/>
+	<label>January price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[0]" required/>
+	<label>February price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[1]" required/>
+	<label>March price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[2]" required/>
+	<label>April price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[3]" required/>
+	<label>May price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[4]" required/>
+	<label>June price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[5]" required/>
+	<label>July price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[6]" required/>
+	<label>August price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[7]" required/>
+	<label>September price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[8]" required/>
+	<label>October price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[9]" required/>
+	<label>November price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[10]" required/>
+	<label>December price:</label><input class="form-group form-control" type="number" min="0" step="0.10" ng-model="$ctrl.accommodation.priceByMonth[11]" required/>
+	<input type="submit" class="btn btn-custom" value="Add" ng-click="accommodation.$valid && $ctrl.send()"/>
+	<p>
+		{{$ctrl.status}}
+	</p>
+</form>
