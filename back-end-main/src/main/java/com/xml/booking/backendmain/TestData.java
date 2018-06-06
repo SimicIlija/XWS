@@ -96,6 +96,7 @@ public class TestData {
         reservation.setLodging(l1);
         reservation.setUser(user1);
         Calendar cal = Calendar.getInstance();
+        cal.set(Calendar.MONTH, Calendar.JANUARY);
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);

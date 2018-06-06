@@ -1,1 +1,67 @@
-<h1>Searhc Lodging</h1>
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Search</h3>
+        </div>
+        <div class="panel-body">
+            <form>
+                <div ng-class="'alert alert-danger'" ng-show='searchVm.errorHappened()'>{{searchVm.errorMessage}}</div>
+                <div class="form-group">
+                    <label for="place">Place</label>
+                    <input type="text" class="form-control" id="place" placeholder="Enter place"
+                           ng-model="searchVm.dto.place">
+                </div>
+                <div class="form-group">
+                    <label for="people">Number of people:</label>
+                    <input type="number" class="form-control" id="numberOfPeople" placeholder="Number of people"
+                           ng-model="searchVm.dto.numberOfPeople">
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start date:</label>
+                    <input type="date" class="form-control" id="startDate" ng-model="searchVm.dto.startDate">
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End date:</label>
+                    <input type="date" class="form-control" id="endDate" ng-model="searchVm.dto.endDate">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-outline-primary" ng-click="searchVm.search()">
+                        <i class="fa fa-search"></i>Search
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<br>
+<div class="panel panel-default" ng-show="searchVm.showResults()">
+    <div class="panel-heading">
+        <h3>
+            Available lodgings in {{searchVm.results.place | uppercase}} in period between {{searchVm.results.startDate
+            | date:shortDate}} and
+            {{searchVm.results.endDate | date:shortDate}}:
+        </h3>
+    </div>
+    <table class="table table-bordered table-hover">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Reserve</th>
+        </tr>
+        </thead>
+        <tbody ng-repeat="lodging in searchVm.results.lodgings">
+        <th>
+            <button type="button" class="btn btn-link">
+                {{lodging.name}}
+            </button>
+        </th>
+        <th>{{lodging.textDescription}}</th>
+        <th>
+            <button type="button" ng-show="searchVm.loggedIn()"
+                    class="btn btn-link" ng-click="searchVm.reserve(lodging.id)"> Book!
+            </button>
+        </th>
+        </tbody>
+    </table>
+</div>

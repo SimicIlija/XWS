@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -69,5 +71,21 @@ public class ReservationService {
 
     public List<Reservation> findByUser(User user) {
         return reservationRepository.findByUser_Id(user.getId());
+    }
+
+    public List<Reservation> findByUserHistory(User user) {
+        List<Reservation> all = reservationRepository.findByUser_Id(user.getId());
+        Date date = new Date();
+        return all.stream()
+                .filter(reservation -> reservation.getEndDate().before(date))
+                .collect(Collectors.toList());
+    }
+
+    public List<Reservation> findByUserFuture(User user) {
+        List<Reservation> all = reservationRepository.findByUser_Id(user.getId());
+        Date date = new Date();
+        return all.stream()
+                .filter(reservation -> reservation.getStartDate().after(date))
+                .collect(Collectors.toList());
     }
 }
