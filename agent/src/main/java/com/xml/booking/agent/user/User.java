@@ -1,10 +1,11 @@
 package com.xml.booking.agent.user;
 
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
@@ -12,6 +13,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.xml.booking.agent.user.UserType;
 
 @Entity
 public class User {
@@ -33,8 +35,11 @@ public class User {
 	@NotBlank
 	private String address;
 	
-	@NotNull
 	private long workId;
+	
+	@Enumerated(EnumType.STRING)
+    @JsonProperty(access = Access.READ_ONLY)
+	private UserType userType;
 	
 	@Email
 	@NotBlank
@@ -47,13 +52,14 @@ public class User {
 
 	public User() {}
 
-	public User(String firstName, String lastName, String address, long workId, String email, String password) {
+	public User(String firstName, String lastName, String address, long workId, String email, String password, UserType userType) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
 		this.workId = workId;
 		this.email = email;
 		this.password = password;
+		this.userType = userType;
 	}
 
 	public long getId() {
@@ -102,6 +108,14 @@ public class User {
 
 	public void setWorkId(long workId) {
 		this.workId = workId;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 
 	public String getEmail() {

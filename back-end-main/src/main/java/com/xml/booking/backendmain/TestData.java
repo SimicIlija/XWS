@@ -46,7 +46,7 @@ public class TestData {
 //			return;
 
         User user1 = new User("ch@me", "qweqwe", "Chewbacca", "Chewbacca", "Kashyyyk", null);
-        user1.setUserType(UserType.VISITOR);
+        user1.setUserType(UserType.AGENT);
         user1.setEmailConfirmed(true);
         userService.register(user1);
 

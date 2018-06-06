@@ -1,15 +1,12 @@
 package com.xml.booking.agent;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.xml.booking.agent.accommodation.Accommodation;
-import com.xml.booking.agent.accommodation.AccommodationRepository;
 import com.xml.booking.agent.accommodation.AccomodationService;
 import com.xml.booking.agent.messages.Message;
 import com.xml.booking.agent.messages.MessageRepository;
@@ -19,6 +16,7 @@ import com.xml.booking.agent.optionCatalog.CatalogRepository;
 import com.xml.booking.agent.optionCatalog.OptionType;
 import com.xml.booking.agent.user.User;
 import com.xml.booking.agent.user.UserRepository;
+import com.xml.booking.agent.user.UserType;
 
 @Component
 public class TestData {
@@ -36,10 +34,10 @@ public class TestData {
 	
 	@PostConstruct
 	private void init() {
-		User u1 = new User("pera", "peric", "adresa", 31231321, "bora@bora", "borabora");
+		User u1 = new User("pera", "peric", "adresa", 31231321, "bora@bora", "borabora", UserType.AGENT);
 		u1 = userRepository.save(u1);
 		
-		User u2 = new User("a", "a", "a", 31231321, "aaaa@aaaa", "aaaaaa");
+		User u2 = new User("a", "a", "a", 31231321, "aaaa@aaaa", "aaaaaa", UserType.AGENT);
 		u2 = userRepository.save(u2);
 	
 		Catalog c1 = new Catalog(OptionType.TYPE, "tip");
@@ -57,13 +55,13 @@ public class TestData {
 		}
 		
 		ArrayList<Catalog> add = new ArrayList<>();
-		add.add(catalogRepository.findOne(3L));
+		add.add(catalogRepository.getOne(3L));
 		
-		Accommodation a1 = new Accommodation("a", "a", c1, c2, "a", null, 1, add, list);
+		Accommodation a1 = new Accommodation(u1, "a", "a", c1, c2, "a", null, 1, add, list);
 		//a1.setId(1L);
 		accommodationRepository.add(a1);
 		
-		Accommodation a2 = new Accommodation("b", "b", c1, c2, "b", null, 1, add, list);
+		Accommodation a2 = new Accommodation(u1, "b", "b", c1, c2, "b", null, 1, add, list);
 		//a2.setId(2L);
 		accommodationRepository.add(a2);
 		

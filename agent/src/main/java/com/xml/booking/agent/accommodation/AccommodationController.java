@@ -61,7 +61,7 @@ public class AccommodationController {
 		if(user == null)
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 
-		Accommodation accommodation = accommodationConverter.fromDTO(accommodationDTO);
+		Accommodation accommodation = accommodationConverter.fromDTO(user, accommodationDTO);
 		if(accommodation == null)
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		

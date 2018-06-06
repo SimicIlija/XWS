@@ -1,4 +1,4 @@
-package com.xml.booking.backendmain.users;
+package com.xml.booking.agent.user;
 
 public enum UserType {
 	

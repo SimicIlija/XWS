@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import com.xml.booking.agent.optionCatalog.Catalog;
 import com.xml.booking.agent.optionCatalog.CatalogService;
 import com.xml.booking.agent.optionCatalog.OptionType;
+import com.xml.booking.agent.user.User;
 
 @Component
 public class AccommodationConverter {
@@ -15,7 +16,7 @@ public class AccommodationConverter {
 	@Autowired
 	private CatalogService catalogService;
 	
-	public Accommodation fromDTO(AccommodationDTO dto) {
+	public Accommodation fromDTO(User agent, AccommodationDTO dto) {
 		
 		Catalog type = catalogService.findOne(dto.getType());
 		if(type == null || type.getType().compareTo(OptionType.TYPE) != 0)
@@ -39,7 +40,7 @@ public class AccommodationConverter {
 				return null;
 		}
 		
-		return new Accommodation(dto.getName(), dto.getAddress(), type, category, dto.getDescription(), dto.getImages(), dto.getBadNumber(), services, dto.getPriceByMonth());
+		return new Accommodation(agent, dto.getName(), dto.getAddress(), type, category, dto.getDescription(), dto.getImages(), dto.getBadNumber(), services, dto.getPriceByMonth());
 	}
 
 }

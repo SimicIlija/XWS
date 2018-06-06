@@ -3,6 +3,7 @@ package com.xml.booking.backendmain.lodging;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
+import com.xml.booking.backendmain.users.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
@@ -19,6 +20,10 @@ public class Lodging {
 
     @Version
     private Long version;
+    
+    //@NotNull
+	@ManyToOne
+	private User agent;
 
     @ManyToOne(fetch = FetchType.EAGER)
     private Catalog type;
@@ -32,7 +37,7 @@ public class Lodging {
 
     private String textDescription;
 
-    @Min(0)
+    @Min(1)
     private int numberOfGuests;
 
     @ElementCollection
@@ -83,7 +88,17 @@ public class Lodging {
         this.version = version;
     }
 
-    public Catalog getType() {
+    public User getAgent() {
+		return agent;
+	}
+
+
+	public void setAgent(User agent) {
+		this.agent = agent;
+	}
+
+
+	public Catalog getType() {
         return type;
     }
 

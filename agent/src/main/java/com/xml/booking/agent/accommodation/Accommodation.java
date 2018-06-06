@@ -13,6 +13,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.agent.optionCatalog.Catalog;
+import com.xml.booking.agent.user.User;
 
 @Entity
 public class Accommodation {
@@ -24,6 +25,10 @@ public class Accommodation {
 	
 	@Version
 	private long version;
+	
+	@NotNull
+	@ManyToOne
+	private User agent;
 	
 	@NotBlank
 	private String name;
@@ -50,7 +55,7 @@ public class Accommodation {
 	@Min(1)
 	private int badNumber;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	private List<Catalog> additionalServices;
 	
 	@NotEmpty
@@ -60,7 +65,8 @@ public class Accommodation {
 
 	public Accommodation() {}
 
-	public Accommodation(String name, String address, Catalog type, Catalog category, String description, List<String> images, int badNumber, List<Catalog> additionalServices, List<Double> priceByMonth) {
+	public Accommodation(User agent, String name, String address, Catalog type, Catalog category, String description, List<String> images, int badNumber, List<Catalog> additionalServices, List<Double> priceByMonth) {
+		this.agent = agent;
 		this.name = name;
 		this.address = address;
 		this.type = type;
@@ -86,6 +92,14 @@ public class Accommodation {
 
 	public void setVersion(long version) {
 		this.version = version;
+	}
+
+	public User getAgent() {
+		return agent;
+	}
+
+	public void setAgent(User agent) {
+		this.agent = agent;
 	}
 
 	public String getName() {

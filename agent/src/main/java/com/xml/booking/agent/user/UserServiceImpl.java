@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
 		if(existing == null)
 			return null;
 		
-		if(existing.getPassword().equals(user.getPassword()))
+		if(existing.getPassword().equals(user.getPassword()) && existing.getUserType().equals(UserType.AGENT))
 			return existing;
 		
 		return null;

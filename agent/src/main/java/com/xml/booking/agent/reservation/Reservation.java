@@ -5,6 +5,7 @@ import com.xml.booking.agent.accommodation.Accommodation;
 import com.xml.booking.agent.user.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Reservation {
@@ -13,15 +14,20 @@ public class Reservation {
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
-    @ManyToOne()
+    @ManyToOne
     private Accommodation accommodation;
 
-    @ManyToOne()
+    @ManyToOne
     private User user;
     
+    @NotNull
     private Long startDate;
     
+    @NotNull
     private Long endDate;
+    
+    @NotNull
+    private Boolean confirmed = false;
 
     public Reservation() {}
     

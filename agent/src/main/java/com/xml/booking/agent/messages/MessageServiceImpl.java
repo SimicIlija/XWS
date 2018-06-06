@@ -28,7 +28,7 @@ public class MessageServiceImpl implements MessageService {
 	@Transactional(readOnly = false)
 	public Message addMessage(Long masterId, Message input) {
 		Message master = messageRepository.findOne(masterId);
-		if(master == null)
+		if(master == null || !master.getMaster())
 			return null;
 		
 		input.setReceiver(master.getSender());
