@@ -1,13 +1,11 @@
 package com.xml.booking.backendmain.users;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.xml.booking.backendmain.optionCatalog.Catalog;
 
 @Transactional(readOnly = true)
 @Service
@@ -108,6 +106,11 @@ public class UserServiceImpl implements UserService {
 			return null;
 		}
 		return user;
+	}
+
+	@Override
+	public List<User> findAllNotAdmin() {
+		return userRepository.findByUserTypeIn(Arrays.asList(UserType.AGENT, UserType.VISITOR));
 	}
 
 

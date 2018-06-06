@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html ng-app="agent">
+<head>
+	<!-- Required meta tags -->
+	<meta charset="UTF-8"/>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+
+	<!-- CSS -->
+	<link rel="stylesheet" href="css/lib/bootstrap-4.0.0.css"/>
+	<link rel="stylesheet" href="css/lib/angucomplete-alt.css"/>
+	<link rel="stylesheet" href="css/lib/isteven-multi-select.css"/>
+	<link rel="stylesheet" href="font/fa/css/fontawesome-all.css"/>
+	<link rel="stylesheet" href="css/main.css"/>
+
+	<title>Agent</title>
+</head>
+<body>
+	<my-header></my-header>
+	<div class="container-fluid">
+		<ui-view></ui-view>
+	</div>
+
+	<!-- Javascript -->
+	<!-- jQuery Slim -->
+	<script src="js/lib/jquery-3.3.1.slim.js"></script>
+	<!-- Popper.js -->
+	<script src="js/lib/popper-1.12.9.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/lib/bootstrap-4.0.0.js"></script>
+	
+
+	<!-- AngularJS -->
+	<script src="js/lib/angular-1.6.9.js"></script>
+	<script src="js/lib/angular-ui-router.js"></script>
+	<script src="js/app.module.js"></script>
+	<script src="js/app.config.js"></script>
+	
+	<script src="js/core/core.module.js"></script>
+	<script src="js/core/user/user.module.js"></script>
+	<script src="js/core/user/user.service.js"></script>
+	<script src="js/core/catalog/catalog.module.js"></script>
+	<script src="js/core/catalog/catalog.service.js"></script>
+	<script src="js/core/accommodation/accommodation.module.js"></script>
+	<script src="js/core/accommodation/accommodation.service.js"></script>
+	<script src="js/core/reservation/reservation.module.js"></script>
+	<script src="js/core/reservation/reservation.service.js"></script>
+	<script src="js/core/message/message.module.js"></script>
+	<script src="js/core/message/message.service.js"></script>
+	
+	<script src="part/home/home.module.js"></script>
+	<script src="part/home/home.component.js"></script>
+	<script src="part/home/sidebar/sidebar.module.js"></script>
+	<script src="part/home/sidebar/sidebar.component.js"></script>
+	<script src="part/header/header.module.js"></script>
+	<script src="part/header/header.component.js"></script>
+	<script src="part/login/login.module.js"></script>
+	<script src="part/login/login.component.js"></script>
+	<script src="part/profile/profile.module.js"></script>
+	<script src="part/profile/profile.component.js"></script>
+	<script src="part/accommodation/accommodation.module.js"></script>
+	<script src="part/accommodation/accommodation.component.js"></script>
+	<script src="part/set-unavailable/set-unavailable.module.js"></script>
+	<script src="part/set-unavailable/set-unavailable.component.js"></script>
+	<script src="part/messages/messages.module.js"></script>
+	<script src="part/messages/messages.component.js"></script>
+	
+	
+	<!-- Multiselect -->
+	<script src="js/lib/isteven-multi-select.js"></script>
+	<!-- AnguComplete -->
+	<script src="js/lib/angucomplete-alt.min.js"></script>
+	
+</body>
+</html>

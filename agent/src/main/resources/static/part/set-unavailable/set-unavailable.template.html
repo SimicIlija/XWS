@@ -1,0 +1,62 @@
+<div angucomplete-alt id="selection"
+				 placeholder="Search Accommodation by name or address"
+				 maxlength="50"
+			  	 pause="100"
+			     selected-object="$ctrl.selected"
+			     local-data="$ctrl.accommodations"
+			     search-fields="name,address"
+			     title-field="name,address"
+			     minlength="1"
+			     input-class="form-control form-group"
+			     override-suggestions="true"
+			     clear-selected="true"
+			     match-class="highlight"></div>
+<table class="table" ng-if="$ctrl.selAcc">
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+  </tr>
+  <tr>
+    <td>{{$ctrl.selAcc.name}}</td>
+    <td>{{$ctrl.selAcc.address}}</td>
+  </tr>
+</table>
+
+<div ng-if="$ctrl.unavailableDates">
+	<label><h5>Unavailable dates:</h5></label>
+	<table class="table">
+		<tr>
+			<th>From</th>
+			<th>To</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="fromTo in $ctrl.unavailableDates">
+			<td><input class="form-control form-group" type="date" ng-model="fromTo[0]" readonly/></td>
+			<td><input class="form-control form-group" type="date" ng-model="fromTo[1]" readonly/></td>
+			<td><button class="btn btn-custom" ng-click="$ctrl.deleteDate(fromTo[2])">Delete</button></td>
+		</tr>
+	</table>
+</div>
+<form ng-if="$ctrl.selAcc" name = "dates">
+<label><h5>Set unavailable dates:</h5></label>
+	<table class="table">
+		<tr>
+			<th>From</th>
+			<th>To</th>
+			<th></th>
+		</tr>
+		<tr ng-repeat="i in $ctrl.dates">
+			<td><input class="form-control form-group" type="date" ng-model="$ctrl.datesData[i][0]" required/></td>
+			<td><input class="form-control form-group" type="date" ng-model="$ctrl.datesData[i][1]" required/></td>
+			<td><button class="btn btn-custom" ng-if="$ctrl.dates.length != 1" ng-click="$ctrl.removeDate(i)">Remove</button></td>
+		</tr>
+		<tr>
+			<td><input class="btn btn-custom" type="submit" value="Set dates" ng-click="dates.$valid && $ctrl.send()"></td>
+			<td></td>
+			<td><button class="btn btn-custom" ng-click="$ctrl.addDate()">Add</button></td>
+		</tr>
+	</table>
+	<p>
+		{{$ctrl.status}}
+	</p>
+</form>

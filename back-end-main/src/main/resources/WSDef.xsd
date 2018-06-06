@@ -1,0 +1,120 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://booking.xml.com/backendmain/ws-classes"
+           targetNamespace="http://booking.xml.com/backendmain/ws-classes" elementFormDefault="qualified">
+<!--TEST-->
+<xs:element name="testRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="name" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+</xs:element>
+
+<xs:element name="testResponse">
+	<xs:complexType>
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:element>
+<!--TEST-->
+
+<!--REQRES-->
+<xs:element name="getDBRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="token" type="xs:string"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="getDBResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="users" type="tns:userXML" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="catalogs" type="tns:catalogXML" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="accommodations" type="tns:accommodationXML" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="reservations" type="tns:reservationXML" maxOccurs="unbounded" minOccurs="0"/>
+            <xs:element name="messages" type="tns:messageXML" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+<!--REQRES-->
+
+<!--ENTYTIES-->
+<xs:complexType name="userXML">
+    <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="firstName" type="xs:string"/>
+        <xs:element name="lastName" type="xs:string"/>
+        <xs:element name="address" type="xs:string"/>
+        <xs:element name="workId" type="xs:long"/>
+        <xs:element name="userType" type="tns:userTypeXML"/>
+        <xs:element name="email" type="xs:string"/>
+        <xs:element name="password" type="xs:string"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="userTypeXML">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="VISITOR"/>
+        <xs:enumeration value="AGENT"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="accommodationXML">
+    <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="agent" type="tns:userXML"/>
+        <xs:element name="name" type="xs:string"/>
+        <xs:element name="address" type="xs:string"/>
+        <xs:element name="type" type="tns:catalogXML"/>
+        <xs:element name="category" type="tns:catalogXML"/>
+        <xs:element name="description" type="xs:string"/>
+        <xs:element name="images" type="xs:string" maxOccurs="unbounded" minOccurs="1"/>
+        <xs:element name="badNumber" type="xs:int"/>
+        <xs:element name="additionalServices" type="tns:catalogXML" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="priceByMonth" type="xs:double" maxOccurs="12" minOccurs="12"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="catalogXML">
+    <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="type" type="tns:optionTypeXML"/>
+        <xs:element name="value" type="xs:string"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:simpleType name="optionTypeXML">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="TYPE"/>
+        <xs:enumeration value="CATEGORY"/>
+        <xs:enumeration value="ADDITIONAL_SERVICES"/>
+    </xs:restriction>
+</xs:simpleType>
+
+<xs:complexType name="reservationXML">
+    <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="accommodation" type="tns:accommodationXML"/>
+        <xs:element name="user" type="tns:userXML"/>
+        <xs:element name="startDate" type="xs:long"/>
+        <xs:element name="endDate" type="xs:long"/>
+        <xs:element name="confirmed" type="xs:boolean"/>
+    </xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="messageXML">
+    <xs:sequence>
+        <xs:element name="id" type="xs:long"/>
+        <xs:element name="sender" type="tns:userXML"/>
+        <xs:element name="receiver" type="tns:userXML"/>
+        <xs:element name="timeStamp" type="xs:long"/>
+        <xs:element name="content" type="xs:string"/>
+        <xs:element name="master" type="xs:boolean"/>
+        <xs:element name="messages" type="tns:messageXML" maxOccurs="unbounded" minOccurs="0"/>
+    </xs:sequence>
+</xs:complexType>
+
+<!--ENTYTIES-->
+</xs:schema>

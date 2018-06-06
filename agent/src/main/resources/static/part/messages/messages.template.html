@@ -1,0 +1,33 @@
+<div class="flex-column float-right pre-scrollable panel" style="max-height: 75vh;height: 75vh;">
+	<a ng-repeat="msg in $ctrl.messages" ng-click="$ctrl.displayMessage($index)">{{msg.sender.email}}</a>
+</div>
+
+<div ng-if="$ctrl.message" class="flex-column" style="max-width: 95vh;">
+	<div class="card text-center bg-secondary">
+		<div class="card-body">
+			{{$ctrl.message.sender.email}}
+			<button class="btn btn-custom" ng-click="$ctrl.refresh()"><i class="fa fa-sync"></i></button>
+		</div>
+	</div>
+	<div class="card bg-secondary">
+		<div class="card-body">
+			{{$ctrl.message.content}}
+		</div>
+	</div>
+	<div class="card" ng-repeat="msg in $ctrl.message.messages" ng-class="{'bg-secondary': $root.user.id != msg.sender.id}">
+		<div class="card-body">
+			{{msg.content}}
+		</div>
+	</div>
+	<div class="card ">
+		<div class="card-body">
+			<form name="message">
+				<textarea placeholder="Message" class="form-group form-control" rows="3" ng-model="$ctrl.toSend" required></textarea>
+				<input type="submit" class="btn btn-custom" value="Send" ng-click="message.$valid && $ctrl.send()"/>
+			</form>
+		</div>
+		<p>
+			{{$ctrl.status}}
+		</p>
+	</div>
+</div>

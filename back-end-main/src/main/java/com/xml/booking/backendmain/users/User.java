@@ -61,6 +61,8 @@ public class User {
     private boolean blocked;
 
     private boolean deleted;
+    
+    private long workId;
 
     public User() {
         this.blocked = false;
@@ -199,7 +201,15 @@ public class User {
         this.deleted = deleted;
     }
 
-    @Override
+    public long getWorkId() {
+		return workId;
+	}
+
+	public void setWorkId(long workId) {
+		this.workId = workId;
+	}
+
+	@Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

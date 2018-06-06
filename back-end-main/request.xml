@@ -1,0 +1,9 @@
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+				  xmlns:gs="http://booking.xml.com/backendmain/ws-classes">
+   <soapenv:Header/>
+   <soapenv:Body>
+      <gs:testRequest>
+         <gs:name>Spain</gs:name>
+      </gs:testRequest>
+   </soapenv:Body>
+</soapenv:Envelope>

@@ -19,14 +19,11 @@ import java.util.stream.Collectors;
 public class ReservationService {
     private final ReservationRepository reservationRepository;
 
-    private final UserRepository userRepository;
-
     private final LodgingRepository lodgingRepository;
 
     @Autowired
     public ReservationService(ReservationRepository reservationRepository, UserRepository userRepository, LodgingRepository lodgingRepository) {
         this.reservationRepository = reservationRepository;
-        this.userRepository = userRepository;
         this.lodgingRepository = lodgingRepository;
     }
 
@@ -67,6 +64,13 @@ public class ReservationService {
             throw new AuthException("User cannot cancel other users reservation");
         }
         reservationRepository.delete(reservation);
+    }
+    
+    public Boolean canSendMessage(Long userId, Long agentId) {
+    	List<Reservation> reservations = reservationRepository.findByLodging_Agent_IdAndUser_Id(agentId, userId);
+    	if(reservations == null || reservations.isEmpty())
+    		return false;
+    	return true;
     }
 
     public List<Reservation> findByUser(User user) {

@@ -7,6 +7,8 @@ public interface UserService {
 	User findOne(Long id);
 
 	List<User> findAll();
+	
+	List<User> findAllNotAdmin();
 
 	User register(User user);
 

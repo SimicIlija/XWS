@@ -5,6 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ReservationRepository extends JpaRepository<Reservation, Long> {
+	
+	public List<Reservation> findByLodging_Agent_IdAndUser_Id(Long agentId, Long userId);
+	
     public List<Reservation> findByLodging_Id(long id);
 
     public List<Reservation> findByUser_Id(long id);

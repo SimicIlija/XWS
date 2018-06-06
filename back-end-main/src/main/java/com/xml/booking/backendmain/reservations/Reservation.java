@@ -5,6 +5,8 @@ import com.xml.booking.backendmain.lodging.Lodging;
 import com.xml.booking.backendmain.users.User;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import java.util.Date;
 
 @Entity
@@ -21,13 +23,17 @@ public class Reservation {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User user;
-
+    
+    @NotNull
     private Date startDate;
-
+    
+    @NotNull
     private Date endDate;
+    
+    @NotNull
+    private Boolean confirmed = false;
 
-    public Reservation() {
-    }
+    public Reservation() {}
 
     public Long getId() {
         return id;
@@ -69,7 +75,15 @@ public class Reservation {
         this.endDate = endDate;
     }
 
-    /**
+    public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
+	}
+
+	/**
      * Proverava poklapanja datuma,
      * vraca tacno ako se neki od datuma Dto nalazi izmedju start i end date
      * hoce da rezervise na vec postojecu rezervaciju
