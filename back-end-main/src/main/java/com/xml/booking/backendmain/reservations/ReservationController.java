@@ -69,4 +69,28 @@ public class ReservationController {
         List<Reservation> reservations = reservationService.findByUser(user);
         return new ResponseEntity<Object>(reservations, HttpStatus.OK);
     }
+
+    @RequestMapping(value = "/personal/future", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getMyFutureReservationsList() {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            throw new AuthException("Login first");
+        }
+        List<Reservation> reservations = reservationService.findByUserFuture(user);
+        return new ResponseEntity<Object>(reservations, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/personal/history", method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> getMyHistoryReservationsList() {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            throw new AuthException("Login first");
+        }
+        List<Reservation> reservations = reservationService.findByUserHistory(user);
+        return new ResponseEntity<Object>(reservations, HttpStatus.OK);
+    }
+
+
 }

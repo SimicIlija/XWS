@@ -1,14 +1,14 @@
 
 /* Colors */
 :root {
-	--fg_color: #d3dae3;
-	--base_color: #404552;
-	--bg_color: #383c4a;
-	--border_color: #2b2e39;
+    --fg_color: #001f3f;
+    --base_color: #dddddd;
+    --bg_color: #dddddd;
+    --border_color: #001f3f;
 	--selected_fg_color: #ffffff;
-	--selected_bg_color: #ff5f5f;
-	--link_color: #f1a9a9;
-	--placeholder_text_color: #a8a8a8;
+    --selected_bg_color: #001f3f;
+    --link_color: #001f3f;
+    --placeholder_text_color: #7FDBFF;
 }
 
 /* Lato font*/
