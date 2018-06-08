@@ -1,5 +1,6 @@
 package com.xml.booking.agent.accommodation;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -15,11 +16,14 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.agent.optionCatalog.Catalog;
 import com.xml.booking.agent.user.User;
 
+import backendmain.wsdl.AccommodationXML;
+import backendmain.wsdl.CatalogXML;
+
 @Entity
 public class Accommodation {
 	
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private long id;
 	
@@ -76,6 +80,21 @@ public class Accommodation {
 		this.badNumber = badNumber;
 		this.additionalServices = additionalServices;
 		this.priceByMonth = priceByMonth;
+	}
+
+	public Accommodation(AccommodationXML accommodationXML) {
+		this.id = accommodationXML.getId();
+		this.agent = new User(accommodationXML.getAgent());
+		this.name = accommodationXML.getName();
+		this.address = accommodationXML.getAddress();
+		this.type = new Catalog(accommodationXML.getType());
+		this.category = new Catalog(accommodationXML.getCategory());
+		this.description = accommodationXML.getDescription();
+		this.images = accommodationXML.getImages();
+		this.badNumber = accommodationXML.getBadNumber();
+		this.priceByMonth = accommodationXML.getPriceByMonth();
+		for(CatalogXML catalogXML : accommodationXML.getAdditionalServices())
+			this.getAdditionalServices().add(new Catalog(catalogXML));
 	}
 
 	public long getId() {
@@ -159,6 +178,8 @@ public class Accommodation {
 	}
 
 	public List<Catalog> getAdditionalServices() {
+		if(this.additionalServices == null)
+			this.additionalServices = new ArrayList<>();
 		return additionalServices;
 	}
 

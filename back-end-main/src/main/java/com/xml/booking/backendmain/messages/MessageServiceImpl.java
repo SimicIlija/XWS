@@ -15,6 +15,8 @@ public class MessageServiceImpl implements MessageService {
 	
 	@Override
 	public Message findOne(Long id) {
+		if(id == null)
+			return null;
 		return messageRepository.getOne(id);
 	}
 	
@@ -31,7 +33,7 @@ public class MessageServiceImpl implements MessageService {
 			input = messageRepository.save(input);
 		} else {
 			Message master = messageRepository.getOne(masterId);
-			if(master.getMaster() != true)
+			if(master == null || !master.getMaster())
 				return null;
 			input = messageRepository.save(input);
 			master.getMessages().add(input);

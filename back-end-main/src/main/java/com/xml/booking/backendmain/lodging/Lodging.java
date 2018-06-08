@@ -7,6 +7,12 @@ import com.xml.booking.backendmain.users.User;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,8 +27,7 @@ public class Lodging {
     @Version
     private Long version;
     
-    //@NotNull
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private User agent;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -41,14 +46,17 @@ public class Lodging {
     private int numberOfGuests;
 
     @ElementCollection
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Column(length = 30000000)
     private List<String> imageUrls = new ArrayList<>();
 
     @ElementCollection
-    //@Size(min=12, max=12)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @Size(min=12, max=12)
     private List<Double> prices = new ArrayList<>();
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "LODGING_CATALOG",
             joinColumns = @JoinColumn(name = "LODGING_ID", referencedColumnName = "ID"),
@@ -60,9 +68,10 @@ public class Lodging {
     }
 
 
-    public Lodging(Catalog type, Catalog catagoty, List<Catalog> additionalServices,
-                   String name, String location, String textDescription, int numberOfGuests) {
+    public Lodging(User agent, Catalog type, Catalog catagoty, List<Catalog> additionalServices,
+                   String name, String location, String textDescription, int numberOfGuests, List<Double> prices) {
         super();
+        this.agent = agent;
         this.type = type;
         this.catagoty = catagoty;
         this.additionalServices = additionalServices;
@@ -70,6 +79,7 @@ public class Lodging {
         this.location = location;
         this.textDescription = textDescription;
         this.numberOfGuests = numberOfGuests;
+        this.prices = prices;
     }
 
     public Long getId() {

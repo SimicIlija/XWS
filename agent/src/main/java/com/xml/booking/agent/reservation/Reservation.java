@@ -4,13 +4,15 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.xml.booking.agent.accommodation.Accommodation;
 import com.xml.booking.agent.user.User;
 
+import backendmain.wsdl.ReservationXML;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class Reservation {
     @Id
-    @GeneratedValue
+    //@GeneratedValue
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Long id;
 
@@ -39,6 +41,16 @@ public class Reservation {
 		this.endDate = endDate;
 	}
 
+	public Reservation(ReservationXML reservationXML) {
+		this.id = reservationXML.getId();
+		this.accommodation = new Accommodation(reservationXML.getAccommodation());
+		if(reservationXML.getUser() != null)
+			this.user = new User(reservationXML.getUser());
+		this.startDate = reservationXML.getStartDate();
+		this.endDate = reservationXML.getEndDate();
+		this.confirmed = reservationXML.isConfirmed();
+	}
+
 	public Long getId() {
         return id;
     }
@@ -51,7 +63,7 @@ public class Reservation {
         return accommodation;
     }
 
-    public void setLodging(Accommodation accommodation) {
+    public void setAccommodation(Accommodation accommodation) {
         this.accommodation = accommodation;
     }
 
@@ -78,4 +90,13 @@ public class Reservation {
     public void setEndDate(Long endDate) {
         this.endDate = endDate;
     }
+
+	public Boolean getConfirmed() {
+		return confirmed;
+	}
+
+	public void setConfirmed(Boolean confirmed) {
+		this.confirmed = confirmed;
+	}
+    
 }

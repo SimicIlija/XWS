@@ -22,10 +22,21 @@
 <xs:element name="getDBRequest">
     <xs:complexType>
         <xs:sequence>
-            <xs:element name="token" type="xs:string"/>
+            <xs:element name="token" type="xs:string" nillable="false"/>
+            <xs:element name="type" type="tns:DBRequestType" maxOccurs="4" minOccurs="0" nillable="false"/>
         </xs:sequence>
     </xs:complexType>
 </xs:element>
+
+<xs:simpleType name="DBRequestType">
+    <xs:restriction base="xs:string">
+        <xs:enumeration value="USER"/>
+        <xs:enumeration value="CATALOG"/>
+        <xs:enumeration value="ACCOMMODATION"/>
+        <xs:enumeration value="RSERVATION"/>
+        <xs:enumeration value="MESSAGE"/>
+    </xs:restriction>
+</xs:simpleType>
 
 <xs:element name="getDBResponse">
     <xs:complexType>
@@ -35,6 +46,109 @@
             <xs:element name="accommodations" type="tns:accommodationXML" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="reservations" type="tns:reservationXML" maxOccurs="unbounded" minOccurs="0"/>
             <xs:element name="messages" type="tns:messageXML" maxOccurs="unbounded" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="logInRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="token" type="xs:string" nillable="false"/>
+            <xs:element name="user" type="tns:userXML"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="logInResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="user" type="tns:userXML"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="addAccommodationRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="token" type="xs:string" nillable="false"/>
+            <xs:element name="accommodation" type="tns:accommodationXML"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="addAccommodationResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="accommodation" type="tns:accommodationXML"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="addMessageRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="token" type="xs:string" nillable="false"/>
+            <xs:element name="masterId" type="xs:long"/>
+            <xs:element name="message" type="tns:messageXML"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="addMessageResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="message" type="tns:messageXML"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="addReservationsRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="token" type="xs:string" nillable="false"/>
+            <xs:element name="reservations" type="tns:reservationXML" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="addReservationsResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="reservations" type="tns:reservationXML" maxOccurs="unbounded" minOccurs="1"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="confirmReservationRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="token" type="xs:string" nillable="false"/>
+            <xs:element name="reservation" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="confirmReservationResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="reservation" type="tns:reservationXML"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="deleteReservationRequest">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="token" type="xs:string" nillable="false"/>
+            <xs:element name="reservation" type="xs:long"/>
+        </xs:sequence>
+    </xs:complexType>
+</xs:element>
+
+<xs:element name="deleteReservationResponse">
+    <xs:complexType>
+        <xs:sequence>
+            <xs:element name="reservation" type="tns:reservationXML"/>
         </xs:sequence>
     </xs:complexType>
 </xs:element>

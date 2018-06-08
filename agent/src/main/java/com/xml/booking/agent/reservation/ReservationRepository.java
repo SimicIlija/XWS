@@ -14,4 +14,6 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     public List<Reservation> findByAccommodation_IdAndUser(Long id, User user);
     
     public List<Reservation> findByUser_Id(Long id);
+    
+    public List<Reservation> findByConfirmedAndUserNotNull(Boolean confirmed);
 }

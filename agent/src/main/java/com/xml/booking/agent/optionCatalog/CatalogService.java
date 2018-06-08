@@ -2,6 +2,8 @@ package com.xml.booking.agent.optionCatalog;
 
 import java.util.List;
 
+import backendmain.wsdl.CatalogXML;
+
 public interface CatalogService {
 
 	Catalog findOne(Long id);
@@ -14,5 +16,6 @@ public interface CatalogService {
 	
 	Catalog delete(Long id);
 	
+	void cloneDB(List<CatalogXML> catalogsXML);
 	
 }

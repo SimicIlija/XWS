@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import backendmain.wsdl.CatalogXML;
+
 @Transactional(readOnly = true)
 @Service
 public class CatalogServiceImpl implements CatalogService{
@@ -48,6 +50,14 @@ public class CatalogServiceImpl implements CatalogService{
 			return null;
 		}
 		return catalog;
+	}
+
+	@Override
+	@Transactional(readOnly = false)
+	public void cloneDB(List<CatalogXML> catalogsXML) {
+		catalogRepository.deleteAllInBatch();
+		for(CatalogXML catalogXML : catalogsXML)
+			catalogRepository.save(new Catalog(catalogXML));
 	}
 
 	

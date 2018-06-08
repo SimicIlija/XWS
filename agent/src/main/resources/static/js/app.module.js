@@ -7,5 +7,6 @@ angular.module('agent', [
 	'core',
 	'accommodation',
 	'set-unavailable',
-	'messages'
+	'messages',
+	'confirm-reservation'
 ]);

@@ -20,7 +20,7 @@ public class ReservationController {
     private final HttpSession session;
 
     @Autowired
-    public ReservationController(ReservationService reservationService, HttpSession session) {
+    public ReservationController(ReservationServiceImpl reservationService, HttpSession session) {
         this.reservationService = reservationService;
         this.session = session;
     }

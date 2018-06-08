@@ -4,11 +4,13 @@ import com.xml.booking.backendmain.comment.Comment;
 import com.xml.booking.backendmain.comment.CommentService;
 import com.xml.booking.backendmain.lodging.Lodging;
 import com.xml.booking.backendmain.lodging.LodgingService;
+import com.xml.booking.backendmain.messages.Message;
+import com.xml.booking.backendmain.messages.MessageService;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
 import com.xml.booking.backendmain.optionCatalog.CatalogService;
 import com.xml.booking.backendmain.optionCatalog.OptionType;
 import com.xml.booking.backendmain.reservations.Reservation;
-import com.xml.booking.backendmain.reservations.ReservationService;
+import com.xml.booking.backendmain.reservations.ReservationServiceImpl;
 import com.xml.booking.backendmain.users.User;
 import com.xml.booking.backendmain.users.UserService;
 import com.xml.booking.backendmain.users.UserType;
@@ -18,6 +20,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -29,16 +32,19 @@ public class TestData {
     private final LodgingService lodgingService;
     private final CommentService commentService;
 
-    private final ReservationService reservationService;
+    private final ReservationServiceImpl reservationService;
 
     @Autowired
-    public TestData(UserService userService, CatalogService catalogService, LodgingService lodgingService, CommentService commentService, ReservationService reservationService) {
+    public TestData(UserService userService, CatalogService catalogService, LodgingService lodgingService, CommentService commentService, ReservationServiceImpl reservationService) {
         this.userService = userService;
         this.catalogService = catalogService;
         this.lodgingService = lodgingService;
         this.commentService = commentService;
         this.reservationService = reservationService;
     }
+    
+    @Autowired
+    private MessageService messageService;
 
     @PostConstruct
     private void init() {
@@ -66,6 +72,9 @@ public class TestData {
         catalogService.add(c11);
         catalogService.add(c12);
         catalogService.add(c13);
+        
+        c11.setValue("telho");
+        catalogService.add(c11);
 
         Catalog c21 = new Catalog(OptionType.CATEGORY, "1 Star");
         Catalog c22 = new Catalog(OptionType.CATEGORY, "2 Star");
@@ -88,13 +97,13 @@ public class TestData {
         }
 
         List<Catalog> list1 = Arrays.asList(n[0], n[1], n[2]);
-        Lodging l1 = new Lodging(c11, c21, list1, "Lodging 1",
-                "Novi Sad", "Opis objekta", 5);
+        Lodging l1 = new Lodging(user1, c11, c21, list1, "Lodging 1",
+                "Novi Sad", "Opis objekta", 5, Arrays.asList(0.0, 0.0, 0.0, 0.0, 0.0 ,0.0 ,0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
         lodgingService.add(l1);
 
         Reservation reservation = new Reservation();
         reservation.setLodging(l1);
-        reservation.setUser(user1);
+        reservation.setUser(user2);
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.MONTH, Calendar.JANUARY);
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -109,5 +118,16 @@ public class TestData {
         Comment c2 = new Comment(user2, l1, "Second comment", (long) 1527026814, false);
         commentService.add(c1);
         commentService.add(c2);
+        
+        Reservation reservation2 = new Reservation();
+        reservation2.setLodging(l1);
+        reservation2.setUser(user2);
+        reservation2.setStartDate(new Date());
+        reservation2.setEndDate(new Date());
+        reservationService.addNew(reservation2);
+        
+        
+        Message msg1 = new Message(user2, user1, System.currentTimeMillis(), "Pitanje bla bla bla", true, null);
+        messageService.addMessage(-1L, msg1);
     }
 }

@@ -3,7 +3,7 @@ package com.xml.booking.backendmain.messages;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.xml.booking.backendmain.reservations.ReservationService;
+import com.xml.booking.backendmain.reservations.ReservationServiceImpl;
 import com.xml.booking.backendmain.users.User;
 import com.xml.booking.backendmain.users.UserService;
 
@@ -14,7 +14,7 @@ public class MessageConverter {
 	private UserService userService;
 	
 	@Autowired
-	private ReservationService reservationService;
+	private ReservationServiceImpl reservationService;
 	
 	public Message fromDTO(User sender, MessageDTO dto) {
 		if(dto.getContent().trim().isEmpty())
