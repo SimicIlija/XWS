@@ -11,7 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Transactional(readOnly = true)
 @Service
@@ -110,5 +112,23 @@ public class ReservationServiceImpl implements ReservationService {
 		
 		reservationRepository.deleteById(id);
 		return dbRes;
+	}
+
+	@Override
+	public List<Reservation> findByUserHistory(User user) {
+		List<Reservation> all = reservationRepository.findByUser_Id(user.getId());
+        Date date = new Date();
+        return all.stream()
+                .filter(reservation -> reservation.getEndDate().before(date))
+                .collect(Collectors.toList());
+	}
+
+	@Override
+	public List<Reservation> findByUserFuture(User user) {
+		List<Reservation> all = reservationRepository.findByUser_Id(user.getId());
+        Date date = new Date();
+        return all.stream()
+                .filter(reservation -> reservation.getStartDate().after(date))
+                .collect(Collectors.toList());
 	}
 }
