@@ -37,7 +37,6 @@ import com.xml.booking.backendmain.ws_classes.LogInResponse;
 import com.xml.booking.backendmain.ws_classes.ReservationXML;
 import com.xml.booking.backendmain.ws_classes.TestRequest;
 import com.xml.booking.backendmain.ws_classes.TestResponse;
-import com.xml.booking.backendmain.ws_classes.UserTypeXML;
 
 @Endpoint
 public class WSEndpoint {

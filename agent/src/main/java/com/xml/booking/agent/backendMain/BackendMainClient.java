@@ -8,11 +8,9 @@ import org.springframework.ws.soap.client.core.SoapActionCallback;
 
 import com.xml.booking.agent.accommodation.Accommodation;
 import com.xml.booking.agent.messages.Message;
-import com.xml.booking.agent.optionCatalog.Catalog;
 import com.xml.booking.agent.reservation.Reservation;
 import com.xml.booking.agent.user.User;
 
-import backendmain.wsdl.AccommodationXML;
 import backendmain.wsdl.AddAccommodationRequest;
 import backendmain.wsdl.AddAccommodationResponse;
 import backendmain.wsdl.AddMessageRequest;

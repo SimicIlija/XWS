@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.PostConstruct;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -102,7 +103,7 @@ public class TestData {
 
         Reservation reservation = new Reservation();
         reservation.setLodging(l1);
-        reservation.setUser(user1);
+        reservation.setUser(user2);
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.MONTH, Calendar.JANUARY);
         cal.set(Calendar.HOUR_OF_DAY, 0);
@@ -117,6 +118,14 @@ public class TestData {
         Comment c2 = new Comment(user2, l1, "Second comment", (long) 1527026814, false);
         commentService.add(c1);
         commentService.add(c2);
+        
+        Reservation reservation2 = new Reservation();
+        reservation2.setLodging(l1);
+        reservation2.setUser(user2);
+        reservation2.setStartDate(new Date());
+        reservation2.setEndDate(new Date());
+        reservationService.addNew(reservation2);
+        
         
         Message msg1 = new Message(user2, user1, System.currentTimeMillis(), "Pitanje bla bla bla", true, null);
         messageService.addMessage(-1L, msg1);

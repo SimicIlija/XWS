@@ -13,7 +13,6 @@ import com.xml.booking.backendmain.messages.MessageService;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
 import com.xml.booking.backendmain.optionCatalog.CatalogService;
 import com.xml.booking.backendmain.reservations.Reservation;
-import com.xml.booking.backendmain.reservations.ReservationServiceImpl;
 import com.xml.booking.backendmain.users.User;
 import com.xml.booking.backendmain.users.UserService;
 import com.xml.booking.backendmain.ws_classes.AccommodationXML;
@@ -33,8 +32,6 @@ public class ConverterXML {
 	private CatalogService catalogService;
 	@Autowired
 	private LodgingService lodgingService;
-	@Autowired
-	private ReservationServiceImpl reservationService;
 	@Autowired
 	private MessageService messageService;
 	

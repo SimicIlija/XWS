@@ -43,17 +43,17 @@ public class ConverterXML {
 	private TruncateDatabaseService truncateDatabaseService;
 	
 	public void cloneDB() {
-		GetDBResponse response = backendMainClient.getDB(new ArrayList<>());
 		try {
+			GetDBResponse response = backendMainClient.getDB(new ArrayList<>());
 			truncateDatabaseService.truncate();
+			userService.cloneDB(response.getUsers());
+			catalogService.cloneDB(response.getCatalogs());
+			lodgingService.cloneDB(response.getAccommodations());
+			reservationService.cloneDB(response.getReservations());
+			messageService.cloneDB(response.getMessages());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		userService.cloneDB(response.getUsers());
-		catalogService.cloneDB(response.getCatalogs());
-		lodgingService.cloneDB(response.getAccommodations());
-		reservationService.cloneDB(response.getReservations());
-		messageService.cloneDB(response.getMessages());
 	}
 	
 	public UserXML userToUserXML(User user) {

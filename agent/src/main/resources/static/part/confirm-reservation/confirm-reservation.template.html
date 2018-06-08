@@ -1,0 +1,39 @@
+<div angucomplete-alt id="selection"
+				 placeholder="Search unconfirmed reservations by accommodation name or address or users first or last name"
+				 maxlength="50"
+			  	 pause="100"
+			     selected-object="$ctrl.selected"
+			     local-data="$ctrl.unconfirmed"
+			     search-fields="accommodation.name,accommodation.address,user.firstName,user.lastName"
+			     title-field="accommodation.name,accommodation.address,user.firstName,user.lastName"
+			     minlength="1"
+			     input-class="form-control form-group"
+			     override-suggestions="true"
+			     clear-selected="true"
+			     match-class="highlight"></div>
+			     
+<table class="table" ng-if="$ctrl.selected.originalObject.id">
+  <tr>
+    <th>Accommodation name</th>
+    <th>Accommodation address</th>
+    <th>First name</th>
+    <th>Last name</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th></th>
+  </tr>
+  <tr>
+    <td>{{$ctrl.selected.originalObject.accommodation.name}}</td>
+    <td>{{$ctrl.selected.originalObject.accommodation.address}}</td>
+    <td>{{$ctrl.selected.originalObject.user.firstName}}</td>
+    <td>{{$ctrl.selected.originalObject.user.lastName}}</td>
+    <td><input class="form-control form-group" type="date" ng-model="$ctrl.startDate" readonly/></td>
+    <td><input class="form-control form-group" type="date" ng-model="$ctrl.endDate" readonly/></td>
+    <td><button class="btn btn-custom" ng-click="$ctrl.send($ctrl.selected.originalObject.id)">Confirm</button></td>
+  </tr>
+  
+</table>		     
+<p>
+	{{$ctrl.status}}
+</p>
+			    

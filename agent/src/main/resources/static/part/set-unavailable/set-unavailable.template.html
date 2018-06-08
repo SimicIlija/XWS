@@ -11,7 +11,7 @@
 			     override-suggestions="true"
 			     clear-selected="true"
 			     match-class="highlight"></div>
-<table class="table" ng-if="$ctrl.selAcc">
+<table class="table" ng-if="$ctrl.selAcc.id">
   <tr>
     <th>Name</th>
     <th>Address</th>
@@ -37,7 +37,7 @@
 		</tr>
 	</table>
 </div>
-<form ng-if="$ctrl.selAcc" name = "dates">
+<form ng-if="$ctrl.selAcc.id" name = "dates">
 <label><h5>Set unavailable dates:</h5></label>
 	<table class="table">
 		<tr>

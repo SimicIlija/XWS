@@ -24,6 +24,11 @@ angular.module('agent')
 				component: 'myMessages'
 			})
 			.state({
+				name: 'home.confirmReservation',
+				url: 'confirm-reservation',
+				component: 'myConfirmReservation'
+			})
+			.state({
 				name: 'error',
 				url: '/error',
 				template: '<h1>Error 404</h1>'

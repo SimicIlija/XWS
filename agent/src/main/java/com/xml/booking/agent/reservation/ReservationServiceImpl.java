@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xml.booking.agent.accommodation.AccomodationService;
 import com.xml.booking.agent.backendMain.BackendMainClient;
-import com.xml.booking.agent.backendMain.ConverterXML;
 import com.xml.booking.agent.user.UserService;
 
 import backendmain.wsdl.AddReservationsResponse;
@@ -37,7 +36,7 @@ public class ReservationServiceImpl implements ReservationService {
 
 	@Override
 	public List<Reservation> findAll() {
-		return reservationRepository.findAll();
+		return reservationRepository.findByConfirmedAndUserNotNull(false);
 	}
 
 	@Override

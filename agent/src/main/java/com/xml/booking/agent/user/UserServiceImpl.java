@@ -40,7 +40,11 @@ public class UserServiceImpl implements UserService {
 	@Override
 	@Transactional(readOnly = false)
 	public User logIn(UserLogIn user) {
-		converterXML.cloneDB();
+		try {
+			converterXML.cloneDB();
+		} catch (Exception e) {
+			return null;
+		}
 		User existing = userRepository.findByEmail(user.getEmail());
 		if(existing == null)
 			return null;
