@@ -29,6 +29,8 @@ public class Reservation {
     
     @NotNull
     private Date endDate;
+
+    private int numberOfPeople;
     
     @NotNull
     private Boolean confirmed = false;
@@ -83,7 +85,15 @@ public class Reservation {
 		this.confirmed = confirmed;
 	}
 
-	/**
+    public int getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(int numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
+    /**
      * Proverava poklapanja datuma,
      * vraca tacno ako se neki od datuma Dto nalazi izmedju start i end date
      * hoce da rezervise na vec postojecu rezervaciju

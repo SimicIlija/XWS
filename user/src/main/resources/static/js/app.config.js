@@ -1,10 +1,10 @@
 'use strict';
 
 angular.module('booking-admin')
-	.config(function($stateProvider, $urlRouterProvider,$httpProvider) {
-		
+	.config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+
 		$httpProvider.defaults.withCredentials = true;
-		
+
 		$stateProvider
 			.state({
 				name: 'home',
@@ -13,8 +13,8 @@ angular.module('booking-admin')
 			})
 			.state({
 				name: 'home.lodging',
-				url: '^/lodging',
-				component: 'mylodging'
+				url: '^/lodging/{myObject:json}',
+				component: 'myLodging'
 			})
 			.state({
 				name: 'userAuth',
@@ -31,7 +31,7 @@ angular.module('booking-admin')
 				url: '^/search',
 				component: 'mySearch'
 			})
-			
+
 			.state({
 				name: 'error',
 				url: '/error',
@@ -42,7 +42,7 @@ angular.module('booking-admin')
 			.when('', '/')
 			.otherwise('/error');
 	})
-	.run(function($rootScope, UserAuthService) {
+	.run(function ($rootScope, UserAuthService) {
 		UserAuthService.getUser().then(
 			(response) => {
 				$rootScope.user = response.data;

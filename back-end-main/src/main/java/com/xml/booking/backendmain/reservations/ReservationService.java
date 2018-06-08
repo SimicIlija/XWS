@@ -48,11 +48,15 @@ public class ReservationService {
                 throw new BadRequestException("Lodging already booked");
             }
         }
+        if(lodging.getNumberOfGuests() < reservationDto.getNumberOfPeople()){
+            throw new BadRequestException("Not enough place of all guests :/");
+        }
         Reservation reservation = new Reservation();
         reservation.setUser(user);
         reservation.setLodging(lodging);
         reservation.setEndDate(reservationDto.getEndDate());
         reservation.setStartDate(reservationDto.getStartDate());
+        reservation.setNumberOfPeople(reservationDto.getNumberOfPeople());
         return reservationRepository.save(reservation);
     }
 

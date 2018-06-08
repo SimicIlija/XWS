@@ -12,6 +12,10 @@ public class ReservationDto {
     @NotNull
     private Date endDate;
 
+    @NotNull
+    @Min(1)
+    private Integer numberOfPeople;
+
     public ReservationDto() {
     }
 
@@ -43,4 +47,11 @@ public class ReservationDto {
         return endDate.after(startDate);
     }
 
+    public Integer getNumberOfPeople() {
+        return numberOfPeople;
+    }
+
+    public void setNumberOfPeople(Integer numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
 }

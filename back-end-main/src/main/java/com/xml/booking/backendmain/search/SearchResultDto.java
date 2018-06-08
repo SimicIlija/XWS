@@ -14,7 +14,7 @@ public class SearchResultDto {
 
     private Date endDate;
 
-    private Integer numberOfPeople;
+    private int numberOfPeople;
 
     public SearchResultDto() {
     }
@@ -55,7 +55,7 @@ public class SearchResultDto {
         return numberOfPeople;
     }
 
-    public void setNumberOfPeople(Integer numberOfPeople) {
+    public void setNumberOfPeople(int numberOfPeople) {
         this.numberOfPeople = numberOfPeople;
     }
 }

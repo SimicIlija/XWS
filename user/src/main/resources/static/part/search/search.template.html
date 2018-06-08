@@ -8,13 +8,11 @@
                 <div ng-class="'alert alert-danger'" ng-show='searchVm.errorHappened()'>{{searchVm.errorMessage}}</div>
                 <div class="form-group">
                     <label for="place">Place</label>
-                    <input type="text" class="form-control" id="place" placeholder="Enter place"
-                           ng-model="searchVm.dto.place">
+                    <input type="text" class="form-control" id="place" placeholder="Enter place" ng-model="searchVm.dto.place">
                 </div>
                 <div class="form-group">
                     <label for="people">Number of people:</label>
-                    <input type="number" class="form-control" id="numberOfPeople" placeholder="Number of people"
-                           ng-model="searchVm.dto.numberOfPeople">
+                    <input type="number" class="form-control" id="numberOfPeople" placeholder="Number of people" ng-model="searchVm.dto.numberOfPeople">
                 </div>
                 <div class="form-group">
                     <label for="startDate">Start date:</label>
@@ -37,31 +35,28 @@
 <div class="panel panel-default" ng-show="searchVm.showResults()">
     <div class="panel-heading">
         <h3>
-            Available lodgings in {{searchVm.results.place | uppercase}} in period between {{searchVm.results.startDate
-            | date:shortDate}} and
-            {{searchVm.results.endDate | date:shortDate}}:
+            Available lodgings in {{searchVm.results.place | uppercase}} in period between {{searchVm.results.startDate | date:shortDate}}
+            and {{searchVm.results.endDate | date:shortDate}}:
         </h3>
     </div>
     <table class="table table-bordered table-hover">
         <thead>
-        <tr>
-            <th>Name</th>
-            <th>Description</th>
-            <th>Reserve</th>
-        </tr>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Reserve</th>
+            </tr>
         </thead>
         <tbody ng-repeat="lodging in searchVm.results.lodgings">
-        <th>
-            <button type="button" class="btn btn-link">
+            <th>
                 {{lodging.name}}
-            </button>
-        </th>
-        <th>{{lodging.textDescription}}</th>
-        <th>
-            <button type="button" ng-show="searchVm.loggedIn()"
-                    class="btn btn-link" ng-click="searchVm.reserve(lodging.id)"> Book!
-            </button>
-        </th>
+            </th>
+            <th>{{lodging.textDescription}}</th>
+            <th>
+                <button type="button" ui-sref="home.lodging({myObject : {results : searchVm.results, current : lodging}})" class="btn btn-link"> 
+                    More info and book!
+                </button>
+            </th>
         </tbody>
     </table>
 </div>
