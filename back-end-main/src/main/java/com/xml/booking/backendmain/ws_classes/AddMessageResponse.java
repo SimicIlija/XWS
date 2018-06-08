@@ -25,7 +25,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="name" type="{http://www.w3.org/2001/XMLSchema}string"/>
+ *         &lt;element name="message" type="{http://booking.xml.com/backendmain/ws-classes}messageXML"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,36 +36,36 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "name"
+    "message"
 })
-@XmlRootElement(name = "testResponse")
-public class TestResponse {
+@XmlRootElement(name = "addMessageResponse")
+public class AddMessageResponse {
 
     @XmlElement(required = true)
-    protected String name;
+    protected MessageXML message;
 
     /**
-     * Gets the value of the name property.
+     * Gets the value of the message property.
      * 
      * @return
      *     possible object is
-     *     {@link String }
+     *     {@link MessageXML }
      *     
      */
-    public String getName() {
-        return name;
+    public MessageXML getMessage() {
+        return message;
     }
 
     /**
-     * Sets the value of the name property.
+     * Sets the value of the message property.
      * 
      * @param value
      *     allowed object is
-     *     {@link String }
+     *     {@link MessageXML }
      *     
      */
-    public void setName(String value) {
-        this.name = value;
+    public void setMessage(MessageXML value) {
+        this.message = value;
     }
 
 }

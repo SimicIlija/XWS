@@ -15,12 +15,12 @@ import java.util.List;
 @RestController
 @RequestMapping(value = "/api/reservations")
 public class ReservationController {
-    private final ReservationService reservationService;
+    private final ReservationServiceImpl reservationService;
 
     private final HttpSession session;
 
     @Autowired
-    public ReservationController(ReservationService reservationService, HttpSession session) {
+    public ReservationController(ReservationServiceImpl reservationService, HttpSession session) {
         this.reservationService = reservationService;
         this.session = session;
     }

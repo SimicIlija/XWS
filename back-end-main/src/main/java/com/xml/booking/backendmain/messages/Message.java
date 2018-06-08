@@ -3,6 +3,7 @@ package com.xml.booking.backendmain.messages;
 import java.util.List;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
@@ -28,9 +29,11 @@ public class Message {
 	@Version
 	private long version;
 	
+	@NotNull
 	@ManyToOne
 	private User sender;
 	
+	@NotNull
 	@ManyToOne
 	private User receiver;
 	
@@ -43,7 +46,7 @@ public class Message {
 	@NotNull
 	private Boolean master;
 	
-	@ManyToMany
+	@ManyToMany(fetch = FetchType.EAGER)
 	@OrderBy("timeStamp")
 	private List<Message> messages;
 

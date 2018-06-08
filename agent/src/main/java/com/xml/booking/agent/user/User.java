@@ -3,7 +3,6 @@ package com.xml.booking.agent.user;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Version;
 import javax.validation.constraints.Size;
@@ -15,11 +14,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.agent.user.UserType;
 
+import backendmain.wsdl.UserXML;
+
 @Entity
 public class User {
 	
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private long id;
 	
@@ -60,6 +61,17 @@ public class User {
 		this.email = email;
 		this.password = password;
 		this.userType = userType;
+	}
+	
+	public User(UserXML userXML) {
+		this.id = userXML.getId();
+		this.firstName = userXML.getFirstName();
+		this.lastName = userXML.getLastName();
+		this.address = userXML.getAddress();
+		this.workId = userXML.getWorkId();
+		this.userType = UserType.valueOf(userXML.getUserType().toString());
+		this.email = userXML.getEmail();
+		this.password = userXML.getPassword();
 	}
 
 	public long getId() {

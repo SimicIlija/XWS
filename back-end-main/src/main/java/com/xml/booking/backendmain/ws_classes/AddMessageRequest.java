@@ -8,8 +8,6 @@
 
 package com.xml.booking.backendmain.ws_classes;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -28,7 +26,8 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="type" type="{http://booking.xml.com/backendmain/ws-classes}DBRequestType" maxOccurs="4" minOccurs="0"/>
+ *         &lt;element name="masterId" type="{http://www.w3.org/2001/XMLSchema}long"/>
+ *         &lt;element name="message" type="{http://booking.xml.com/backendmain/ws-classes}messageXML"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,14 +39,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "token",
-    "type"
+    "masterId",
+    "message"
 })
-@XmlRootElement(name = "getDBRequest")
-public class GetDBRequest {
+@XmlRootElement(name = "addMessageRequest")
+public class AddMessageRequest {
 
     @XmlElement(required = true)
     protected String token;
-    protected List<DBRequestType> type;
+    protected long masterId;
+    @XmlElement(required = true)
+    protected MessageXML message;
 
     /**
      * Gets the value of the token property.
@@ -74,32 +76,43 @@ public class GetDBRequest {
     }
 
     /**
-     * Gets the value of the type property.
-     * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the type property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getType().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DBRequestType }
-     * 
+     * Gets the value of the masterId property.
      * 
      */
-    public List<DBRequestType> getType() {
-        if (type == null) {
-            type = new ArrayList<DBRequestType>();
-        }
-        return this.type;
+    public long getMasterId() {
+        return masterId;
+    }
+
+    /**
+     * Sets the value of the masterId property.
+     * 
+     */
+    public void setMasterId(long value) {
+        this.masterId = value;
+    }
+
+    /**
+     * Gets the value of the message property.
+     * 
+     * @return
+     *     possible object is
+     *     {@link MessageXML }
+     *     
+     */
+    public MessageXML getMessage() {
+        return message;
+    }
+
+    /**
+     * Sets the value of the message property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link MessageXML }
+     *     
+     */
+    public void setMessage(MessageXML value) {
+        this.message = value;
     }
 
 }

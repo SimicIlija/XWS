@@ -1,9 +1,9 @@
 package com.xml.booking.agent.messages;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -17,20 +17,24 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.agent.user.User;
 
+import backendmain.wsdl.MessageXML;
+
 @Entity
 public class Message {
 	
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private long id;
 	
 	@Version
 	private long version;
 	
+	@NotNull
 	@ManyToOne
 	private User sender;
 	
+	@NotNull
 	@ManyToOne
 	private User receiver;
 	
@@ -56,6 +60,19 @@ public class Message {
 		this.content = content;
 		this.master = master;
 		this.messages = messages;
+	}
+
+	public Message(MessageXML messageXML) {
+		this.id = messageXML.getId();
+		if(messageXML.getSender() != null)
+			this.sender = new User(messageXML.getSender());
+		if(messageXML.getReceiver() != null)
+			this.receiver = new User(messageXML.getReceiver());
+		this.timeStamp = messageXML.getTimeStamp();
+		this.content = messageXML.getContent();
+		this.master = messageXML.isMaster();
+		for(MessageXML messageXML2 : messageXML.getMessages())
+			this.getMessages().add(new Message(messageXML2));
 	}
 
 	public long getId() {
@@ -115,6 +132,8 @@ public class Message {
 	}
 
 	public List<Message> getMessages() {
+		if(this.messages == null)
+			this.messages = new ArrayList<>();
 		return messages;
 	}
 

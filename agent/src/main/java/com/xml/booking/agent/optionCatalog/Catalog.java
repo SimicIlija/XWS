@@ -1,5 +1,7 @@
 package com.xml.booking.agent.optionCatalog;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -10,11 +12,13 @@ import javax.persistence.Version;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
+import backendmain.wsdl.CatalogXML;
+
 @Entity
 public class Catalog {
 
 	@Id
-	@GeneratedValue
+	//@GeneratedValue
 	@JsonProperty(access = Access.READ_ONLY)
 	private Long id;
 	
@@ -32,6 +36,12 @@ public class Catalog {
 		super();
 		this.type = type;
 		this.value = value;
+	}
+
+	public Catalog(CatalogXML catalogXML) {
+		this.id = catalogXML.getId();
+		this.type = OptionType.valueOf(catalogXML.getType().toString());
+		this.value = catalogXML.getValue();
 	}
 
 	public Long getId() {

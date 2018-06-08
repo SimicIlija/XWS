@@ -8,8 +8,6 @@
 
 package com.xml.booking.backendmain.ws_classes;
 
-import java.util.ArrayList;
-import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
@@ -28,7 +26,7 @@ import javax.xml.bind.annotation.XmlType;
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
  *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="type" type="{http://booking.xml.com/backendmain/ws-classes}DBRequestType" maxOccurs="4" minOccurs="0"/>
+ *         &lt;element name="user" type="{http://booking.xml.com/backendmain/ws-classes}userXML"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -40,14 +38,15 @@ import javax.xml.bind.annotation.XmlType;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
     "token",
-    "type"
+    "user"
 })
-@XmlRootElement(name = "getDBRequest")
-public class GetDBRequest {
+@XmlRootElement(name = "logInRequest")
+public class LogInRequest {
 
     @XmlElement(required = true)
     protected String token;
-    protected List<DBRequestType> type;
+    @XmlElement(required = true)
+    protected UserXML user;
 
     /**
      * Gets the value of the token property.
@@ -74,32 +73,27 @@ public class GetDBRequest {
     }
 
     /**
-     * Gets the value of the type property.
+     * Gets the value of the user property.
      * 
-     * <p>
-     * This accessor method returns a reference to the live list,
-     * not a snapshot. Therefore any modification you make to the
-     * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the type property.
-     * 
-     * <p>
-     * For example, to add a new item, do as follows:
-     * <pre>
-     *    getType().add(newItem);
-     * </pre>
-     * 
-     * 
-     * <p>
-     * Objects of the following type(s) are allowed in the list
-     * {@link DBRequestType }
-     * 
-     * 
+     * @return
+     *     possible object is
+     *     {@link UserXML }
+     *     
      */
-    public List<DBRequestType> getType() {
-        if (type == null) {
-            type = new ArrayList<DBRequestType>();
-        }
-        return this.type;
+    public UserXML getUser() {
+        return user;
+    }
+
+    /**
+     * Sets the value of the user property.
+     * 
+     * @param value
+     *     allowed object is
+     *     {@link UserXML }
+     *     
+     */
+    public void setUser(UserXML value) {
+        this.user = value;
     }
 
 }

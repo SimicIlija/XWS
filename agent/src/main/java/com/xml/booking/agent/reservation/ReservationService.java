@@ -2,6 +2,8 @@ package com.xml.booking.agent.reservation;
 
 import java.util.List;
 
+import backendmain.wsdl.ReservationXML;
+
 public interface ReservationService {
 	
 	public Reservation findOne(Long id);
@@ -17,5 +19,7 @@ public interface ReservationService {
 	public Reservation confirmReservation(Long id);
 	
 	public Reservation deleteReservation(Long id);
+	
+	void cloneDB(List<ReservationXML> reservationsXML);
 
 }

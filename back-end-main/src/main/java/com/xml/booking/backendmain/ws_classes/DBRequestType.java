@@ -13,32 +13,38 @@ import javax.xml.bind.annotation.XmlType;
 
 
 /**
- * <p>Java class for userTypeXML.
+ * <p>Java class for DBRequestType.
  * 
  * <p>The following schema fragment specifies the expected content contained within this class.
  * <p>
  * <pre>
- * &lt;simpleType name="userTypeXML">
+ * &lt;simpleType name="DBRequestType">
  *   &lt;restriction base="{http://www.w3.org/2001/XMLSchema}string">
- *     &lt;enumeration value="VISITOR"/>
- *     &lt;enumeration value="AGENT"/>
+ *     &lt;enumeration value="USER"/>
+ *     &lt;enumeration value="CATALOG"/>
+ *     &lt;enumeration value="ACCOMMODATION"/>
+ *     &lt;enumeration value="RSERVATION"/>
+ *     &lt;enumeration value="MESSAGE"/>
  *   &lt;/restriction>
  * &lt;/simpleType>
  * </pre>
  * 
  */
-@XmlType(name = "userTypeXML")
+@XmlType(name = "DBRequestType")
 @XmlEnum
-public enum UserTypeXML {
+public enum DBRequestType {
 
-    VISITOR,
-    AGENT;
+    USER,
+    CATALOG,
+    ACCOMMODATION,
+    RSERVATION,
+    MESSAGE;
 
     public String value() {
         return name();
     }
 
-    public static UserTypeXML fromValue(String v) {
+    public static DBRequestType fromValue(String v) {
         return valueOf(v);
     }
 

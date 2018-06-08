@@ -27,8 +27,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="token" type="{http://www.w3.org/2001/XMLSchema}string"/>
- *         &lt;element name="type" type="{http://booking.xml.com/backendmain/ws-classes}DBRequestType" maxOccurs="4" minOccurs="0"/>
+ *         &lt;element name="reservations" type="{http://booking.xml.com/backendmain/ws-classes}reservationXML" maxOccurs="unbounded"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -39,67 +38,41 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
-    "token",
-    "type"
+    "reservations"
 })
-@XmlRootElement(name = "getDBRequest")
-public class GetDBRequest {
+@XmlRootElement(name = "addReservationsResponse")
+public class AddReservationsResponse {
 
     @XmlElement(required = true)
-    protected String token;
-    protected List<DBRequestType> type;
+    protected List<ReservationXML> reservations;
 
     /**
-     * Gets the value of the token property.
-     * 
-     * @return
-     *     possible object is
-     *     {@link String }
-     *     
-     */
-    public String getToken() {
-        return token;
-    }
-
-    /**
-     * Sets the value of the token property.
-     * 
-     * @param value
-     *     allowed object is
-     *     {@link String }
-     *     
-     */
-    public void setToken(String value) {
-        this.token = value;
-    }
-
-    /**
-     * Gets the value of the type property.
+     * Gets the value of the reservations property.
      * 
      * <p>
      * This accessor method returns a reference to the live list,
      * not a snapshot. Therefore any modification you make to the
      * returned list will be present inside the JAXB object.
-     * This is why there is not a <CODE>set</CODE> method for the type property.
+     * This is why there is not a <CODE>set</CODE> method for the reservations property.
      * 
      * <p>
      * For example, to add a new item, do as follows:
      * <pre>
-     *    getType().add(newItem);
+     *    getReservations().add(newItem);
      * </pre>
      * 
      * 
      * <p>
      * Objects of the following type(s) are allowed in the list
-     * {@link DBRequestType }
+     * {@link ReservationXML }
      * 
      * 
      */
-    public List<DBRequestType> getType() {
-        if (type == null) {
-            type = new ArrayList<DBRequestType>();
+    public List<ReservationXML> getReservations() {
+        if (reservations == null) {
+            reservations = new ArrayList<ReservationXML>();
         }
-        return this.type;
+        return this.reservations;
     }
 
 }

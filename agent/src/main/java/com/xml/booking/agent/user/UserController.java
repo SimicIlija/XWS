@@ -34,7 +34,7 @@ public class UserController {
 	@PutMapping
 	public ResponseEntity<User> logIn(@RequestBody @Valid UserLogIn user) {
 		User newUser = userService.logIn(user);
-		if(newUser == null)
+		if(newUser == null || !newUser.getUserType().equals(UserType.AGENT))
 			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		
 		session.setAttribute("user", newUser);
