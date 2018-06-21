@@ -1,5 +1,6 @@
 package com.xml.booking.backendmain.rating;
 
+
 import com.xml.booking.backendmain.exceptions.AuthException;
 import com.xml.booking.backendmain.users.User;
 import org.springframework.beans.factory.annotation.Autowired;

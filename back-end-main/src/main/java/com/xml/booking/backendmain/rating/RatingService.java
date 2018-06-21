@@ -13,6 +13,7 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Date;
 import java.util.Objects;
 
+
 @Service
 public class RatingService {
     private final ReservationRepository reservationRepository;
