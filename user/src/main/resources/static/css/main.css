@@ -2,9 +2,9 @@
 /* Colors */
 :root {
     --fg_color: #001f3f;
-    --base_color: #dddddd;
-    --bg_color: #dddddd;
-    --border_color: #001f3f;
+    --base_color: #C0C0C0;
+    --bg_color: #909090;
+    --border_color: #2b2e39;
 	--selected_fg_color: #ffffff;
     --selected_bg_color: #001f3f;
     --link_color: #001f3f;
