@@ -7,6 +7,9 @@ angular.module('core.user')
 		this.register = (data) => {
 			return $http.post(this.prefix + '/api/user-auth/', data);
 		};
+		this.addAgent = (data) => {
+			return $http.post(this.prefix + '/api/user-auth/agent', data);
+		};
 		this.logIn = (data) => {
 			return $http.put(this.prefix + '/api/user-auth/', data);
 		};

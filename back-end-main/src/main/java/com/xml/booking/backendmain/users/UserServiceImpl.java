@@ -44,7 +44,6 @@ public class UserServiceImpl implements UserService {
 		if(existing == null)
 			return null;
 		
-		existing.setEmailConfirmed(true);
 		return userRepository.save(existing);
 	}
 
@@ -54,8 +53,7 @@ public class UserServiceImpl implements UserService {
 		if(existing == null)
 			return null;
 		
-		if(existing.getPassword().equals(user.getPassword())
-				&& existing.isEmailConfirmed())
+		if(existing.getPassword().equals(user.getPassword()) )
 			return existing;
 		
 		return null;
