@@ -2,5 +2,7 @@
 
 angular.module('search', [
     'ui.router',
-    'core.reservation'
+    'core.reservation',
+    'core.catalog'
+    
 ]);

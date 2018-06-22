@@ -4,9 +4,9 @@
         .module('search')
         .controller('searchController', searchController);
 
-    searchController.$inject = ['searchService', 'reservationService', '$rootScope'];
+    searchController.$inject = ['searchService', 'reservationService', '$rootScope', 'CatalogService'];
 
-    function searchController(searchService, reservationService, $rootScope) {
+    function searchController(searchService, reservationService, $rootScope,CatalogService) {
         var searchVm = this;
         searchVm.dto = {};
         searchVm.results = null;
@@ -20,8 +20,18 @@
         searchVm.showResults = showResults;
         searchVm.reserve = reserve;
         searchVm.loggedIn = loggedIn;
+        searchVm.catalogs = [];
 
+        CatalogService.getAll()
+		.then( (response) => {
+			searchVm.catalogs = response.data;
+		}, () => {
+			this.catalogs = null;
+		});
+        
         function search() {
+        	
+        	
             let bool = verifyData();
             if (!bool) {
                 return;

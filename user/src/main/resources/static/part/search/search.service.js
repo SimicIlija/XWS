@@ -15,6 +15,16 @@
 
         return service;
 
+        function getCatalogs() {
+            return $http.get(url + '/api/catalog')
+                .then(function success(response) {
+                    return response.data;
+                })
+                .catch(function error(response) {
+                    throw response.data;
+                });
+        };
+        
         function search(dto) {
             return $http.post(url + '/api/search', dto)
                 .then(function success(response) {
@@ -23,7 +33,10 @@
                 .catch(function error(response) {
                     throw response.data;
                 });
-        }
+        };  
 
+        
     }
+    
+    
 })();

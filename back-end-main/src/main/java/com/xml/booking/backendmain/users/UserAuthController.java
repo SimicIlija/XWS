@@ -45,6 +45,9 @@ public class UserAuthController {
 	@PostMapping("/agent")
 	public ResponseEntity<User> registerAgent(@RequestBody @Valid User user) 
 			throws  InterruptedException, UnknownHostException {
+		User logedIn = (User) session.getAttribute("user");
+		if(logedIn == null || !logedIn.getUserType().equals(UserType.SYSADMIN))
+			return new ResponseEntity<>(HttpStatus.FORBIDDEN);
 		user.setUserType(UserType.AGENT);
 		User registered = userService.register(user);
 		if(registered == null)

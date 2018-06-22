@@ -22,11 +22,41 @@
                     <label for="endDate">End date:</label>
                     <input type="date" class="form-control" id="endDate" ng-model="searchVm.dto.endDate">
                 </div>
+                <div class="form-group">
+                    <label for="endDate">Select type:</label>
+                    <select name="singleSelect" id="singleSelect" ng-model="searchVm.dto.type">
+					  	<!--  <div class="form-group row" ng-if='catalog.type == "CATEGORY"' >  -->
+					  	<option ng-repeat="catalog in searchVm.catalogs" value = '{{catalog.value}}' ng-if='catalog.type == "TYPE"'>
+					  		{{catalog.value}}
+					  	</option>
+					
+				    </select>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">Select categoriy:</label>
+                    <select name="singleSelect" id="singleSelect" ng-model="searchVm.dto.category">
+					  	<!--  <div class="form-group row" ng-if='catalog.type == "CATEGORY"' >  -->
+					  	<option ng-repeat="catalog in searchVm.catalogs" value = '{{catalog.value}}' ng-if='catalog.type == "CATEGORY"'>
+					  		{{catalog.value}}
+					  	</option>
+					
+				    </select>
+                </div>
+                 <div class="form-group">
+                    <label for="endDate">Select additionl services:</label>
+                    <select name="singleSelect" id="singleSelect" ng-model="searchVm.dto.additionalServices" multiple>
+					  	<option ng-repeat="catalog in searchVm.catalogs" value = '{{catalog.value}}' ng-if='catalog.type == "ADDITIONAL_SERVICES"'>
+					  		{{catalog.value}}
+					  	</option>
+					
+				    </select>
+                </div>
                 <div>
                     <button type="submit" class="btn btn-outline-primary" ng-click="searchVm.search()">
                         <i class="fa fa-search"></i>Search
                     </button>
                 </div>
+                
             </form>
         </div>
     </div>
