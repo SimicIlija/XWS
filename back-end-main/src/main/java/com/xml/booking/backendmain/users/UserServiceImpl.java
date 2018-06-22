@@ -1,5 +1,6 @@
 package com.xml.booking.backendmain.users;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -19,12 +20,15 @@ public class UserServiceImpl implements UserService {
 	public User findOne(Long id) {
 		if(id == null)
 			return null;
-		return userRepository.findById(id).get();
+		User ret =  userRepository.findById(id).get();
+		if(ret.isDeleted())
+			return null;
+		return ret;
 	}
 
 	@Override
 	public List<User> findAll() {
-		return userRepository.findAll();
+		return userRepository.findByDeleted(false);
 	}
 
 	@Override
@@ -51,6 +55,8 @@ public class UserServiceImpl implements UserService {
 	public User logIn(User user) {
 		User existing = userRepository.findByEmail(user.getEmail());
 		if(existing == null)
+			return null;
+		if(existing.isDeleted())
 			return null;
 		
 		if(existing.getPassword().equals(user.getPassword()) )
@@ -80,8 +86,9 @@ public class UserServiceImpl implements UserService {
 		User user= findOne(id);
 		if(user == null)
 			return null;
+		user.setDeleted(true);
 		try {
-			userRepository.delete(user);
+			user = userRepository.save(user);
 		}catch(Exception e){
 			System.out.println("Could not delete User element");
 			return null;

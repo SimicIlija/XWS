@@ -13,5 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	User findByToken(String token);
 	
 	List<User> findByUserTypeIn(List<UserType> userTypes);
+	
+	List<User> findByDeleted(boolean deleted);
 
 }
