@@ -34,6 +34,18 @@ public class UserAuthController {
 	@PostMapping
 	public ResponseEntity<User> register(@RequestBody @Valid User user) 
 			throws  InterruptedException, UnknownHostException {
+		user.setUserType(UserType.VISITOR);
+		User registered = userService.register(user);
+		if(registered == null)
+			return new ResponseEntity<>(HttpStatus.CONFLICT);
+		
+		return new ResponseEntity<>(registered, HttpStatus.OK);
+	}
+	
+	@PostMapping("/agent")
+	public ResponseEntity<User> registerAgent(@RequestBody @Valid User user) 
+			throws  InterruptedException, UnknownHostException {
+		user.setUserType(UserType.AGENT);
 		User registered = userService.register(user);
 		if(registered == null)
 			return new ResponseEntity<>(HttpStatus.CONFLICT);

@@ -2,7 +2,7 @@
   <h1>Edit users</h1>
 
   <div ng-repeat="user in $ctrl.users">
-  	<div class="form-group row" ng-if='user.userType == "VISITOR" '> 
+  	<div class="form-group row" ng-if='user.userType == "VISITOR" || user.userType == "AGENT"'> 
   		<span>&nbsp&nbsp {{user.email}}</span>&nbsp&nbsp&nbsp
   		<button ng-click="$ctrl.deleteUser(user)" class="btn btn-custom">Delete</button>&nbsp&nbsp&nbsp
   		<button ng-click="$ctrl.block_unblock(user)" class="btn btn-custom">Blocked: {{user.blocked}}</button>

@@ -34,8 +34,6 @@ public class User {
     private String password;
 
     @JsonProperty(access = Access.READ_ONLY)
-    private boolean isEmailConfirmed = false;
-    @JsonProperty(access = Access.READ_ONLY)
     private String token = UUID.randomUUID().toString();
 
     @Pattern(regexp = "(?U)\\p{Alpha}*")
@@ -117,13 +115,6 @@ public class User {
         this.password = password;
     }
 
-    public boolean isEmailConfirmed() {
-        return isEmailConfirmed;
-    }
-
-    public void setEmailConfirmed(boolean isEmailConfirmed) {
-        this.isEmailConfirmed = isEmailConfirmed;
-    }
 
     public String getToken() {
         return token;

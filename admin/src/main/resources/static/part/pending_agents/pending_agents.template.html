@@ -1,1 +1,54 @@
-<h1>Pending agents</h1>
+<h1>Add agents</h1>
+
+<form name="registration">
+	<input type="email"
+		class="form-group form-control"
+		placeholder="Email*"
+		ng-model="$ctrl.user.email"
+		required/>
+	<input type="password"
+		class="form-group form-control"
+		placeholder="Password*"
+		ng-model="$ctrl.user.password"
+		minlength="6"
+		required/>
+	<input type="password"
+		class="form-group form-control"
+		placeholder="Enter password again*"
+		ng-model="$ctrl.user.passwordAgain"
+		minlength="6"
+		required/>
+	<input type="text"
+		class="form-group form-control"
+		placeholder="Name"
+		ng-model="$ctrl.user.name"
+		pattern="[a-zA-Z]+"/>
+		<!-- Unicode regex classes are not yet supported in javascript -->
+		<!-- pattern="\p{L}+"/> -->
+	<input type="text"
+		class="form-group form-control"
+		placeholder="Last name"
+		ng-model="$ctrl.user.lastName"
+		pattern="[a-zA-Z]+"/>
+		<!-- Unicode regex classes are not yet supported in javascript -->
+		<!-- pattern="\p{L}+"/> -->
+	<input type="text"
+		class="form-group form-control"
+		placeholder="City"
+		ng-model="$ctrl.user.city"
+		pattern="[a-zA-Z ]+"/>
+		<!-- Unicode regex classes are not yet supported in javascript -->
+		<!-- pattern="[\p{L} ]+"/> -->
+	<input type="number"
+		class="form-group form-control"
+		placeholder="Work id"
+		ng-model="$ctrl.user.workId"
+		>
+	<input type="submit"
+		class="btn btn-custom"
+		value="Register"
+		ng-click="registration.$valid && $ctrl.send()"/>
+	<p>
+		{{$ctrl.status}}
+	</p>
+</form>

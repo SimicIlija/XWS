@@ -53,17 +53,14 @@ public class TestData {
 
         User user1 = new User("ch@me", "qweqwe", "Chewbacca", "Chewbacca", "Kashyyyk", null);
         user1.setUserType(UserType.AGENT);
-        user1.setEmailConfirmed(true);
         userService.register(user1);
 
         User user2 = new User("rms@me", "qweqwe", "Richard", "Stallman", "New York", null);
         user2.setUserType(UserType.VISITOR);
-        user2.setEmailConfirmed(true);
         userService.register(user2);
 
         User user7 = new User("sys@sys", "qweqwe", "Sheev", "Palpatine", "Naboo", null);
         user7.setUserType(UserType.SYSADMIN);
-        user7.setEmailConfirmed(true);
         userService.register(user7);
 
         Catalog c11 = new Catalog(OptionType.TYPE, "Hotel");
