@@ -102,7 +102,7 @@ public class TestData {
         reservation.setLodging(l1);
         reservation.setUser(user2);
         Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.MONTH, Calendar.JANUARY);
+        cal.set(Calendar.MONTH, Calendar.AUGUST);
         cal.set(Calendar.HOUR_OF_DAY, 0);
         cal.set(Calendar.MINUTE, 0);
         cal.set(Calendar.SECOND, 0);
@@ -124,7 +124,8 @@ public class TestData {
         reservationService.addNew(reservation2);
         
         
-        Message msg1 = new Message(user2, user1, System.currentTimeMillis(), "Pitanje bla bla bla", true, null);
-        messageService.addMessage(-1L, msg1);
+//        Message msg1 = new Message(user2, user1, System.currentTimeMillis(), "Pitanje bla bla bla", true, null);
+//        msg1.setReservation(reservation);
+//        messageService.addMessage(-1L, msg1);
     }
 }

@@ -28,4 +28,6 @@ public interface ReservationService {
 	public List<Reservation> findByUserHistory(User user);
 	
 	public List<Reservation> findByUserFuture(User user);
+
+	Reservation finOne(Long id);
 }

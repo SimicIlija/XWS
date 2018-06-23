@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Version;
 import javax.validation.constraints.NotBlank;
@@ -16,6 +17,7 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.xml.booking.backendmain.reservations.Reservation;
 import com.xml.booking.backendmain.users.User;
 
 @Entity
@@ -49,6 +51,9 @@ public class Message {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@OrderBy("timeStamp")
 	private List<Message> messages;
+	
+	@OneToOne
+	private Reservation reservation;
 
 	public Message() {}
 
@@ -123,6 +128,14 @@ public class Message {
 
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
+	}
+
+	public Reservation getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
 	}
 	
 }

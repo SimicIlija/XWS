@@ -4,15 +4,20 @@
         .module('reservation_list')
         .controller('reservationController', reservationController);
 
-    reservationController.$inject = ['reservationService', '$stateParams'];
+    reservationController.$inject = ['reservationService', 'MessageService', '$stateParams'];
 
-    function reservationController(reservationService, $stateParams) {
+    function reservationController(reservationService, MessageService, $stateParams) {
         var reservationVm = this;
         reservationVm.init = init;
         reservationVm.list = [];
         reservationVm.showHistory = showHistory;
         reservationVm.rating = rating;
         reservationVm.cancelReservation = cancelReservation;
+        reservationVm.setMessage = setMessage;
+        reservationVm.messageForm = null;
+        reservationVm.sendMessage = sendMessage;
+        reservationVm.status = null;
+        reservationVm.msgContent = null;
 
         init();
 
@@ -36,6 +41,25 @@
                         console.log(response);
                     });
             }
+        }
+        
+        function sendMessage(reservationId) {
+        	if(reservationVm.msgContent == null || reservationVm.msgContent.trim().length == 0)
+        		return;
+        	
+        	MessageService.addMessage({receiver: -1, master: -1, reservation: reservationId, content: reservationVm.msgContent}).then(() => {
+        		reservationVm.messageForm = null;
+        	}, (response) => {
+        		reservationVm.status = response.status;
+        	});
+        	
+        }
+        
+        function setMessage(id) {
+        	if(reservationVm.messageForm == id)
+        		reservationVm.messageForm = null;
+        	else
+        		reservationVm.messageForm = id;
         }
 
         function rating(id) {

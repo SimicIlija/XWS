@@ -14,4 +14,6 @@ public interface MessageService {
 	
 	public Message addMessage(Long masterId, Message input);
 	
+	public Message findOneReservation(Long reservationId);
+	
 }

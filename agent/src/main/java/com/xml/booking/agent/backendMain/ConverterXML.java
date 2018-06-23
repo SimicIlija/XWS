@@ -129,6 +129,7 @@ public class ConverterXML {
 			ret.setContent(message.getContent());
 			ret.setMaster(message.getMaster());
 			ret.setTimeStamp(message.getTimeStamp());
+			ret.setReservation(reservationToReservationXML(message.getReservation()));
 			for(Message message2 : message.getMessages())
 				ret.getMessages().add(messageToMessageXML(message2));
 			return ret;
@@ -180,6 +181,8 @@ public class ConverterXML {
 				message.setSender(userService.findOne(messageXML.getSender().getId()));
 			if(messageXML.getReceiver() != null)
 				message.setReceiver(userService.findOne(messageXML.getReceiver().getId()));
+			if(messageXML.getReservation() != null)
+				message.setReservation(reservationService.findOne(messageXML.getReservation().getId()));
 			message.setContent(messageXML.getContent());
 			message.setTimeStamp(messageXML.getTimeStamp());
 			message.setMaster(messageXML.isMaster());

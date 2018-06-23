@@ -227,6 +227,7 @@
         <xs:element name="content" type="xs:string"/>
         <xs:element name="master" type="xs:boolean"/>
         <xs:element name="messages" type="tns:messageXML" maxOccurs="unbounded" minOccurs="0"/>
+        <xs:element name="reservation" type="tns:reservationXML"/>
     </xs:sequence>
 </xs:complexType>
 
