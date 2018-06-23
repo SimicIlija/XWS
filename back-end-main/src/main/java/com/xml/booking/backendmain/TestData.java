@@ -97,6 +97,9 @@ public class TestData {
         Lodging l1 = new Lodging(user1, c11, c21, list1, "Lodging 1",
                 "Novi Sad", "Opis objekta", 5, Arrays.asList(0.0, 0.0, 0.0, 0.0, 0.0 ,0.0 ,0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
         lodgingService.add(l1);
+        Lodging l2 = new Lodging(user1, c11, c21, list1, "Lodging 2",
+                "Novi Sad", "Opis objekta", 5, Arrays.asList(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+        lodgingService.add(l2);
 
         Reservation reservation = new Reservation();
         reservation.setLodging(l1);

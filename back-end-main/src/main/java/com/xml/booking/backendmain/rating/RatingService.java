@@ -18,10 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Service
@@ -106,7 +103,7 @@ public class RatingService {
             List<RatingDto> ratings = response.getBody();
             return ratings;
         } catch (Exception e) {
-            throw new NotFoundException("Cloud error");
+            return new ArrayList<>();
         }
     }
 
@@ -123,7 +120,7 @@ public class RatingService {
             List<RatingDto> ratings = response.getBody();
             return ratings;
         } catch (Exception e) {
-            throw new NotFoundException("Cloud error");
+            return new ArrayList<>();
         }
     }
 
@@ -141,7 +138,7 @@ public class RatingService {
             restTemplate.postForEntity(url, request, Object.class);
             return true;
         } catch (Exception e) {
-            throw new NotFoundException("Cloud error");
+            return false;
         }
     }
 
@@ -187,7 +184,7 @@ public class RatingService {
             List<ResultLodging> res = response.getBody();
             return res;
         } catch (Exception e) {
-            throw new NotFoundException("Cloud error");
+            return new ArrayList<>();
         }
     }
 }
