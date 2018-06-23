@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,13 +43,37 @@ public class SearchService {
         List<Lodging> additional = filterAdditional(datesFiltered, searchDto);
         if (searchDto.getRating() != 0) {
             List<Lodging> retVal = filterRating(additional, searchDto.getRating());
-            SearchResultDto searchResultDto = searchDto.create();
-            searchResultDto.setLodgings(retVal);
-            return searchResultDto;
+            return createRetVal(retVal, searchDto);
         }
+        return createRetVal(additional, searchDto);
+    }
+
+    private SearchResultDto createRetVal(List<Lodging> input, @Valid SearchDto searchDto) {
         SearchResultDto searchResultDto = searchDto.create();
-        searchResultDto.setLodgings(additional);
+        List<LodgingDto> dtos = new ArrayList<>();
+        for(Lodging lodging:input){
+            LodgingDto dto = new LodgingDto();
+            dto.setLodging(lodging);
+            dto.setPrice(calculatePrice(lodging, searchDto.getStartDate(), searchDto.getEndDate(), searchDto.getNumberOfPeople()));
+            dto.setAvg(ratingService.getAverageGrade(lodging.getId()));
+            dtos.add(dto);
+        }
+        searchResultDto.setLodgings(dtos);
         return searchResultDto;
+    }
+
+    private double calculatePrice(Lodging lodging, Date startDate, Date endDate, int numberOfPeople) {
+        Calendar startCalendar = Calendar.getInstance();
+        Calendar endCalendar = Calendar.getInstance();
+        startCalendar.setTime(startDate);
+        endCalendar.setTime(endDate);
+        double price = 0;
+        while (startCalendar.before(endCalendar)) {
+            int month = startCalendar.get(Calendar.MONTH);
+            price += numberOfPeople * lodging.getPrices().get(month);
+            startCalendar.add(Calendar.DATE, 1);
+        }
+        return price;
     }
 
     private List<Lodging> filterRating(List<Lodging> input, int rating) {

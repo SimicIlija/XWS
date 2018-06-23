@@ -41,6 +41,7 @@
             searchService
                 .search(searchVm.dto)
                 .then(response => {
+                    console.log(response);
                     searchVm.results = response;
                 }).catch(response => {
                     console.log(response);
