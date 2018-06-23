@@ -6,7 +6,7 @@
 
     searchController.$inject = ['searchService', 'reservationService', '$rootScope', 'CatalogService'];
 
-    function searchController(searchService, reservationService, $rootScope,CatalogService) {
+    function searchController(searchService, reservationService, $rootScope, CatalogService) {
         var searchVm = this;
         searchVm.dto = {};
         searchVm.results = null;
@@ -23,15 +23,15 @@
         searchVm.catalogs = [];
 
         CatalogService.getAll()
-		.then( (response) => {
-			searchVm.catalogs = response.data;
-		}, () => {
-			this.catalogs = null;
-		});
-        
+            .then((response) => {
+                searchVm.catalogs = response.data;
+            }, () => {
+                this.catalogs = null;
+            });
+
         function search() {
-        	
-        	
+
+
             let bool = verifyData();
             if (!bool) {
                 return;

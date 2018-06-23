@@ -12,7 +12,7 @@ angular.module('core.comments')
 			return $http.get(this.prefix + '/api/comment/'+id);
 		};
 		this.getNotApproved = (id) => {
-			return $http.get(this.prefix + '/api/comment/notApproved');
+			return $http.get(this.prefix + '/api/rating/notconfirmed');
 		};
 		this.add = (data) => {
 			return $http.post(this.prefix + '/api/comment/', data);
@@ -21,6 +21,6 @@ angular.module('core.comments')
 			return $http.delete(this.prefix + '/api/comment/'+ id);
 		};
 		this.approve = (id) =>{
-			return $http.put(this.prefix + '/api/comment/approve/'+ id);
+			return $http.post(this.prefix + '/api/rating/confirm/'+ id);
 		};
 	});

@@ -2,6 +2,7 @@ package com.xml.booking.backendmain.rating;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xml.booking.backendmain.exceptions.AuthException;
 import com.xml.booking.backendmain.exceptions.BadRequestException;
 import com.xml.booking.backendmain.exceptions.NotFoundException;
 import com.xml.booking.backendmain.lodging.Lodging;
@@ -139,6 +140,32 @@ public class RatingService {
         try {
             restTemplate.postForEntity(url, request, Object.class);
             return true;
+        } catch (Exception e) {
+            throw new NotFoundException("Cloud error");
+        }
+    }
+
+    public RatingDto findDto(long idReservation, User user) {
+        Reservation reservation = reservationRepository.findById(idReservation).orElseThrow(NotFoundException::new);
+        if(!Objects.equals(reservation.getUser().getId(), user.getId())){
+            throw new AuthException("Bad user");
+        }
+        String url = "https://us-central1-xml-cloud-206017.cloudfunctions.net/testSql";
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            ResponseEntity<List<RatingDto>> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<RatingDto>>() {
+                    });
+            List<RatingDto> ratings = response.getBody();
+            for(RatingDto temp:ratings){
+                if(temp.getIdReservation() == idReservation){
+                    return temp;
+                }
+            }
+            return null;
         } catch (Exception e) {
             throw new NotFoundException("Cloud error");
         }

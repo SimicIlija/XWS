@@ -5,5 +5,6 @@ angular.module('home', [
 	'reservation_list',
 	'search',
 	'userAuth',
-	'lodging'
+	'lodging',
+	'past_reservation'
 ]);

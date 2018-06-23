@@ -10,6 +10,8 @@
                 <h5>{{lodgingVm.data.current.name}}</h5>
                 <em>{{lodgingVm.data.current.textDescription}}</em>
                 <br>
+                <em ng-if="lodgingVm.avg">Average rating: {{lodgingVm.avg}}</em>
+                <br>
                 <strong>TYPE:{{lodgingVm.data.current.type.value}}</strong>
                 <br>
                 <h6>Additional Services</h6>
@@ -17,6 +19,24 @@
                     <li ng-repeat="as in lodgingVm.data.current.additionalServices">{{as.value}}</li>
                 </ul>
             </div>
+            <table class="table table-bordered table-hover" ng-if="lodgingVm.comments">
+                <thead>
+                <tr>
+                    <th>Author</th>
+                    <th>Rating</th>
+                    <th>Comments:</th>
+                </tr>
+                </thead>
+                <tbody ng-repeat="comment in lodgingVm.comments">
+                <th>
+                    {{comment.user.name + " " + comment.user.lastName}}
+                </th>
+                <th>{{comment.rating}}</th>
+        
+                <th>{{comment.comment}}</th>
+              
+                </tbody>
+            </table>
             <ul class="list-group">
                 <li class="list-group-item">From: {{lodgingVm.data.results.startDate |date:shortDate}}</li>
                 <li class="list-group-item">To: {{lodgingVm.data.results.endDate|date:shortDate}}</li>

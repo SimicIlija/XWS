@@ -1,5 +1,8 @@
 package com.xml.booking.backendmain.rating;
 
+import com.xml.booking.backendmain.lodging.Lodging;
+import com.xml.booking.backendmain.users.User;
+
 public class RatingDto {
     private long idReservation;
     private long idLodging;
@@ -7,6 +10,8 @@ public class RatingDto {
     private int rating;
     private String comment;
     private boolean confirmed;
+    private User user;
+    private Lodging lodging;
 
     public RatingDto() {
     }
@@ -57,5 +62,21 @@ public class RatingDto {
 
     public void setConfirmed(boolean confirmed) {
         this.confirmed = confirmed;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Lodging getLodging() {
+        return lodging;
+    }
+
+    public void setLodging(Lodging lodging) {
+        this.lodging = lodging;
     }
 }
