@@ -2,6 +2,7 @@ package com.xml.booking.backendmain.rating;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.xml.booking.backendmain.exceptions.AuthException;
 import com.xml.booking.backendmain.exceptions.BadRequestException;
 import com.xml.booking.backendmain.exceptions.NotFoundException;
 import com.xml.booking.backendmain.lodging.Lodging;
@@ -17,10 +18,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 
 @Service
@@ -105,7 +103,7 @@ public class RatingService {
             List<RatingDto> ratings = response.getBody();
             return ratings;
         } catch (Exception e) {
-            throw new NotFoundException("Cloud error");
+            return new ArrayList<>();
         }
     }
 
@@ -122,7 +120,7 @@ public class RatingService {
             List<RatingDto> ratings = response.getBody();
             return ratings;
         } catch (Exception e) {
-            throw new NotFoundException("Cloud error");
+            return new ArrayList<>();
         }
     }
 
@@ -140,7 +138,53 @@ public class RatingService {
             restTemplate.postForEntity(url, request, Object.class);
             return true;
         } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public RatingDto findDto(long idReservation, User user) {
+        Reservation reservation = reservationRepository.findById(idReservation).orElseThrow(NotFoundException::new);
+        if(!Objects.equals(reservation.getUser().getId(), user.getId())){
+            throw new AuthException("Bad user");
+        }
+        String url = "https://us-central1-xml-cloud-206017.cloudfunctions.net/testSql";
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            ResponseEntity<List<RatingDto>> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.GET,
+                    null,
+                    new ParameterizedTypeReference<List<RatingDto>>() {
+                    });
+            List<RatingDto> ratings = response.getBody();
+            for(RatingDto temp:ratings){
+                if(temp.getIdReservation() == idReservation){
+                    return temp;
+                }
+            }
+            return null;
+        } catch (Exception e) {
             throw new NotFoundException("Cloud error");
+        }
+    }
+
+    public List<ResultLodging> filter(int rating) {
+        String url = "https://us-central1-xml-cloud-206017.cloudfunctions.net/filterRating";
+        RestTemplate restTemplate = new RestTemplate();
+        FilterDto filterDto = new FilterDto();
+        filterDto.setAvRate(rating);
+        HttpEntity<FilterDto> request = new HttpEntity<>(filterDto);
+        try {
+            ResponseEntity<List<ResultLodging>> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    request,
+                    new ParameterizedTypeReference<List<ResultLodging>>() {
+                    });
+            List<ResultLodging> res = response.getBody();
+            return res;
+        } catch (Exception e) {
+            return new ArrayList<>();
         }
     }
 }

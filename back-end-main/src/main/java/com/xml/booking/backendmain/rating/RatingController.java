@@ -2,7 +2,11 @@ package com.xml.booking.backendmain.rating;
 
 
 import com.xml.booking.backendmain.exceptions.AuthException;
+import com.xml.booking.backendmain.exceptions.NotFoundException;
+import com.xml.booking.backendmain.lodging.Lodging;
+import com.xml.booking.backendmain.lodging.LodgingRepository;
 import com.xml.booking.backendmain.users.User;
+import com.xml.booking.backendmain.users.UserRepository;
 import com.xml.booking.backendmain.users.UserType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,11 +23,15 @@ import java.util.List;
 public class RatingController {
 
     private final RatingService ratingService;
+    private final UserRepository userRepository;
+    private final LodgingRepository lodgingRepository;
     private HttpSession session;
 
     @Autowired
-    public RatingController(RatingService ratingService, HttpSession session) {
+    public RatingController(RatingService ratingService, UserRepository userRepository, LodgingRepository lodgingRepository, HttpSession session) {
         this.ratingService = ratingService;
+        this.userRepository = userRepository;
+        this.lodgingRepository = lodgingRepository;
         this.session = session;
     }
 
@@ -43,10 +51,6 @@ public class RatingController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getAverageGrade(@PathVariable long idLodging) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            throw new AuthException("Login first");
-        }
         double value = ratingService.getAverageGrade(idLodging);
         return new ResponseEntity<>(value, HttpStatus.OK);
     }
@@ -55,11 +59,11 @@ public class RatingController {
             method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> getLodgingData(@PathVariable long idLodging) {
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            throw new AuthException("Login first");
-        }
         List<RatingDto> list = ratingService.getLodgingData(idLodging);
+        for (RatingDto temp : list) {
+            User user = userRepository.findById(temp.getIdUser()).orElseThrow(NotFoundException::new);
+            temp.setUser(user);
+        }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -72,6 +76,12 @@ public class RatingController {
             throw new AuthException("Only for admins");
         }
         List<RatingDto> list = ratingService.getNotConfirmedComments();
+        for (RatingDto temp : list) {
+            User u = userRepository.findById(temp.getIdUser()).orElseThrow(NotFoundException::new);
+            Lodging l = lodgingRepository.findById(temp.getIdLodging()).orElseThrow(NotFoundException::new);
+            temp.setUser(u);
+            temp.setLodging(l);
+        }
         return new ResponseEntity<>(list, HttpStatus.OK);
     }
 
@@ -87,4 +97,15 @@ public class RatingController {
         return retVal ? new ResponseEntity<Object>(HttpStatus.OK) : new ResponseEntity<Object>(HttpStatus.NOT_MODIFIED);
     }
 
+    @RequestMapping(value = "/check/{idReservation}",
+            method = RequestMethod.GET,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> checkComment(@PathVariable long idReservation) {
+        User user = (User) session.getAttribute("user");
+        if (user == null) {
+            throw new AuthException("Login first");
+        }
+        RatingDto ratingDto = ratingService.findDto(idReservation, user);
+        return new ResponseEntity<Object>(ratingDto, HttpStatus.OK);
+    }
 }

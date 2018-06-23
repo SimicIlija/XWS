@@ -4,12 +4,14 @@
 		class="card m-md-1 col-lg-4 col-md-6">
 		<div class="card-body">
 			<h3 class="card-title">
-				{{comment.content}}
-				<button class="btn btn-custom"
-					ng-click="$ctrl.approve(comment)">Approve
-				</button>
+				Comment: {{comment.comment}} 
+				<br>
+				Rating: {{comment.rating}}	
 			</h3>
 			<p class="card-text">{{comment.lodging.name}}</p>
-			<p class="card-text">{{comment.user.email}}</p>
+			<p class="card-text">{{comment.user.name + " " + comment.user.lastName}}</p>
+			<button class="btn btn-custom"
+					ng-click="$ctrl.approve(comment.idReservation)">Approve
+				</button>
 		</div>
 </div>

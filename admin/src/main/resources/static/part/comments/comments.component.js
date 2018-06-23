@@ -12,15 +12,15 @@ angular.module('home.comments')
 				this.comments = null;
 			});
 			
-			this.approve = (comment) =>{
-				CommentService.approve(comment.id)
+			this.approve = (idRes) =>{
+				console.log(idRes);
+				CommentService.approve(idRes)
 				.then( (response) => {
-					var com = comment;
 					this.comments = this.comments.filter(function(el){
-						return el.id !== com.id;
+						return el.idReservation !== idRes;
 					});
 				}, () =>{
-					aler("Approving failed");
+					alert("Approving failed");
 				});
 			}
 			

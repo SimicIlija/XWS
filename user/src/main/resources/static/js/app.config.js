@@ -13,8 +13,15 @@ angular.module('booking-admin')
 			})
 			.state({
 				name: 'home.lodging',
-				url: '^/lodging/{myObject:json}',
-				component: 'myLodging'
+				url: '^/lodging/',
+				component: 'myLodging',
+				params: {myObject:{}}
+			})
+			.state({
+				name: 'home.past_reservation',
+				url: '^/past_reservation/',
+				component: 'myPastReservation',
+				params: {myObject:{}}
 			})
 			.state({
 				name: 'userAuth',

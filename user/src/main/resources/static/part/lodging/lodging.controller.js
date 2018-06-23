@@ -4,24 +4,43 @@
         .module('lodging')
         .controller('lodgingController', lodgingController);
 
-    lodgingController.$inject = ['$stateParams', '$state', 'reservationService'];
-    function lodgingController($stateParams, $state, reservationService) {
+    lodgingController.$inject = ['$stateParams', '$state', 'reservationService', 'ratingService'];
+    function lodgingController($stateParams, $state, reservationService, ratingService) {
         var lodgingVm = this;
         lodgingVm.data = $stateParams.myObject;
+        lodgingVm.avg = null;
+        lodgingVm.comments = null;
         lodgingVm.disabled = false;
         lodgingVm.check = check;
         lodgingVm.book = book;
-        
+        lodgingVm.getAvgAndComments = getAvgAndComments;
 
         check();
 
-        function check(){
-            if(lodgingVm.data === undefined){
+        function check() {
+            console.log(lodgingVm.data);
+            if (lodgingVm.data === undefined) {
                 $state.go('error');
             }
+            getAvgAndComments();
         }
-        
-        function book(){
+
+        function getAvgAndComments() {
+            ratingService.getAvg(lodgingVm.data.current.id)
+                .then((response) => {
+                    lodgingVm.avg = response;
+                    ratingService.getComments(lodgingVm.data.current.id)
+                        .then((response) => {
+                            lodgingVm.comments = response;
+                        }, (error) => {
+                            lodgingVm.comments = [];
+                        });
+                }, (error) => {
+                    lodgingVm.avg = 0;
+                });
+        }
+
+        function book() {
             var dto = {};
             dto.lodgingId = lodgingVm.data.current.id;
             dto.startDate = lodgingVm.data.results.startDate;
@@ -35,8 +54,8 @@
                     console.log(response);
                     alert(response.message);
                 });
-            
+
         }
-       
+
     }
 })();

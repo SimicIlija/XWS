@@ -1,0 +1,51 @@
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3>
+            Reservation information:
+        </h3>
+    </div>
+    <div class="panel-body">
+        <div>
+            <div>
+                <h5>{{pastResVm.data.lodging.name}}</h5>
+                <em>{{pastResVm.data.lodging.location}}</em>
+                <br>
+                <em>From: {{pastResVm.data.startDate |date:shortDate}}</em>
+                <br>
+                <em>To: {{pastResVm.data.endDate|date:shortDate}}</em>
+                <br>
+                <em>For: {{pastResVm.data.numberOfPeople}}</em>
+            </div>
+        </div>
+        <div ng-if="pastResVm.showRating">
+            <div ng-if="pastResVm.ratingDto">
+                Comment:
+                <strong>{{pastResVm.ratingDto.comment}}</strong>
+                <br> Rating:
+                <strong>{{pastResVm.ratingDto.rating}}</strong>
+                <br> Accepted:
+                <strong>{{pastResVm.ratingDto.confirmed}}</strong>
+            </div>
+            <div ng-if="!pastResVm.ratingDto">
+                <div class="form-group">
+                    <div ng-class="'alert alert-danger'" ng-if="pastResVm.errorMessage">{{pastResVm.errorMessage}}</div>
+                    <label for="ratingSel">Select rating:</label>
+                    <select name="singleSelect" id="ratingSel" ng-model="pastResVm.newRating.rating">
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <input type="text" class="form-control" id="comment" placeholder="Enter comment" ng-model="pastResVm.newRating.comment">
+                    <button type="submit" class="btn btn-outline-primary" ng-click="pastResVm.addNewRating()">
+                        <i class="fa fa-plus"></i>Add new rating
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

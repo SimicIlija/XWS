@@ -4,9 +4,9 @@
         .module('search')
         .controller('searchController', searchController);
 
-    searchController.$inject = ['searchService', 'reservationService', '$rootScope', 'CatalogService'];
+    searchController.$inject = ['searchService', 'reservationService', '$rootScope', 'CatalogService', '$state'];
 
-    function searchController(searchService, reservationService, $rootScope,CatalogService) {
+    function searchController(searchService, reservationService, $rootScope, CatalogService, $state) {
         var searchVm = this;
         searchVm.dto = {};
         searchVm.results = null;
@@ -20,18 +20,19 @@
         searchVm.showResults = showResults;
         searchVm.reserve = reserve;
         searchVm.loggedIn = loggedIn;
+        searchVm.redirect = redirect;
         searchVm.catalogs = [];
 
         CatalogService.getAll()
-		.then( (response) => {
-			searchVm.catalogs = response.data;
-		}, () => {
-			this.catalogs = null;
-		});
-        
+            .then((response) => {
+                searchVm.catalogs = response.data;
+            }, () => {
+                this.catalogs = null;
+            });
+
         function search() {
-        	
-        	
+            console.log(searchVm.dto);
+
             let bool = verifyData();
             if (!bool) {
                 return;
@@ -95,6 +96,14 @@
                 return false;
             }
             return true;
+        }
+
+        function redirect(results, lodging){
+            var myObject = {};
+            myObject.results = results;
+            myObject.current = lodging;
+            console.log(myObject);
+            $state.go('home.lodging', {myObject});
         }
     }
 })();

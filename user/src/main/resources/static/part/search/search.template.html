@@ -11,7 +11,7 @@
                     <input type="text" class="form-control" id="place" placeholder="Enter place" ng-model="searchVm.dto.place">
                 </div>
                 <div class="form-group">
-                    <label for="people">Number of people:</label>
+                    <label for="numberOfPeople">Number of people:</label>
                     <input type="number" class="form-control" id="numberOfPeople" placeholder="Number of people" ng-model="searchVm.dto.numberOfPeople">
                 </div>
                 <div class="form-group">
@@ -44,11 +44,21 @@
                 </div>
                  <div class="form-group">
                     <label for="endDate">Select additionl services:</label>
-                    <select name="singleSelect" id="singleSelect" ng-model="searchVm.dto.additionalServices" multiple>
+                    <select name="singleSelect" id="singleSelect2" ng-model="searchVm.dto.additionalServices" multiple>
 					  	<option ng-repeat="catalog in searchVm.catalogs" value = '{{catalog.value}}' ng-if='catalog.type == "ADDITIONAL_SERVICES"'>
 					  		{{catalog.value}}
 					  	</option>
 					
+				    </select>
+                </div>
+                <div class="form-group">
+                    <label for="ratingSel">Select minimum rating:</label>
+                    <select name="singleSelect" id="ratingSel" ng-model="searchVm.dto.rating" >
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
 				    </select>
                 </div>
                 <div>
@@ -83,7 +93,7 @@
             </th>
             <th>{{lodging.textDescription}}</th>
             <th>
-                <button type="button" ui-sref="home.lodging({myObject : {results : searchVm.results, current : lodging}})" class="btn btn-link"> 
+                <button type="button" ng-click="searchVm.redirect(searchVm.results, lodging)" class="btn btn-link"> 
                     More info and book!
                 </button>
             </th>

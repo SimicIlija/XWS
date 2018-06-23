@@ -4,20 +4,32 @@
         .module('reservation_list')
         .controller('reservationController', reservationController);
 
+<<<<<<< HEAD
     reservationController.$inject = ['reservationService', 'MessageService', '$stateParams'];
+=======
+    reservationController.$inject = ['reservationService', '$stateParams', '$state'];
+>>>>>>> refs/remotes/origin/master
 
+<<<<<<< HEAD
     function reservationController(reservationService, MessageService, $stateParams) {
+=======
+    function reservationController(reservationService, $stateParams, $state) {
+>>>>>>> refs/remotes/origin/master
         var reservationVm = this;
         reservationVm.init = init;
         reservationVm.list = [];
         reservationVm.showHistory = showHistory;
         reservationVm.rating = rating;
         reservationVm.cancelReservation = cancelReservation;
+<<<<<<< HEAD
         reservationVm.setMessage = setMessage;
         reservationVm.messageForm = null;
         reservationVm.sendMessage = sendMessage;
         reservationVm.status = null;
         reservationVm.msgContent = null;
+=======
+        reservationVm.redirect = redirect;
+>>>>>>> refs/remotes/origin/master
 
         init();
 
@@ -73,6 +85,12 @@
                 }).catch(response => {
                     console.log(response);
                 });
+        }
+
+        function redirect(reservation) {
+            var myObject = {};
+            myObject = reservation;
+            $state.go('home.past_reservation', { myObject });
         }
     }
 })();
