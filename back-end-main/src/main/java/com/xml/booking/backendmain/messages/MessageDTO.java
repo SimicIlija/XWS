@@ -12,7 +12,10 @@ public class MessageDTO {
 	
 	@NotNull
 	private String content;
-
+	
+	@NotNull
+	private Long reservation;
+	
 	public MessageDTO() {}
 
 	public MessageDTO(Long master, String content) {
@@ -42,6 +45,14 @@ public class MessageDTO {
 
 	public void setReceiver(Long receiver) {
 		this.receiver = receiver;
+	}
+
+	public Long getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(Long reservation) {
+		this.reservation = reservation;
 	}
 	
 }

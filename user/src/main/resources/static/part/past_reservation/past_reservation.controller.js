@@ -4,9 +4,9 @@
         .module('past_reservation')
         .controller('pastResController', pastResController);
 
-    pastResController.$inject = ['$stateParams', '$state', 'ratingService'];
+    pastResController.$inject = ['$stateParams', '$state', 'ratingService','$rootScope'];
 
-    function pastResController($stateParams, $state, ratingService) {
+    function pastResController($stateParams, $state, ratingService,$rootScope) {
         var pastResVm = this;
         pastResVm.data = $stateParams.myObject;
         pastResVm.ratingDto = null;
@@ -35,6 +35,10 @@
         }
 
         function addNewRating() {
+        	if($rootScope.user.blocked){
+        		alert("Can not reserved if blocked");
+        		return;
+        	}
             if(pastResVm.newRating.comment === null || pastResVm.newRating.comment === ''){
                 pastResVm.errorMessage = "Comment is empty";
                 return;

@@ -17,7 +17,7 @@ public class MessageServiceImpl implements MessageService {
 	public Message findOne(Long id) {
 		if(id == null)
 			return null;
-		return messageRepository.getOne(id);
+		return messageRepository.findById(id).get();
 	}
 	
 	
@@ -53,6 +53,12 @@ public class MessageServiceImpl implements MessageService {
 	@Override
 	public List<Message> getMasters() {
 		return messageRepository.findByMaster(true);
+	}
+
+
+	@Override
+	public Message findOneReservation(Long reservationId) {
+		return messageRepository.findByReservation_IdAndMaster(reservationId, true);
 	}
 	
 }

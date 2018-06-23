@@ -25,7 +25,7 @@ angular.module('messages').component('myMessages', {
 		};
 		
 		this.send = () => {
-			var msg = {content: this.toSend, master: this.message.id}
+			var msg = {content: this.toSend, master: this.message.id, receiver: -1, reservation: -1}
 			MessageService.addMessage(msg).then( (response) => {
 				this.message.messages.push(response.data);
 				this.toSend = "";

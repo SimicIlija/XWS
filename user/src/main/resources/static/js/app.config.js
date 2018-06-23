@@ -37,6 +37,10 @@ angular.module('booking-admin')
 				name: 'home.search',
 				url: '^/search',
 				component: 'mySearch'
+			}).state({
+				name: 'home.messages',
+				url: '^/messages',
+				component: 'myMessages'
 			})
 
 			.state({

@@ -2,5 +2,8 @@
 
 angular.module('core', [
 	//dependant modules
-	'core.user'
+	'core.user',
+	'core.message',
+	'core.reservation',
+	'core.catalog'
 ]);

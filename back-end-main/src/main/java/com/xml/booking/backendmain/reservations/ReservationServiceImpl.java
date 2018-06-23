@@ -31,7 +31,24 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     @Transactional(readOnly = false)
     public Reservation addNew(Reservation reservation) {
+    	if(reservation.getStartDate().getTime() > reservation.getEndDate().getTime())
+    		return null;
+    		
+    	List<Reservation> reservations = reservationRepository.findByLodging_Id(reservation.getLodging().getId());
+        for (Reservation res : reservations) {
+            if(between(res.getEndDate().getTime(), reservation.getStartDate().getTime(), reservation.getEndDate().getTime()) || between(res.getStartDate().getTime(), reservation.getStartDate().getTime(), reservation.getEndDate().getTime()))
+            	return null;
+            
+        	if (between(reservation.getStartDate().getTime(), res.getStartDate().getTime(), res.getEndDate().getTime()) || between(reservation.getEndDate().getTime(), res.getStartDate().getTime(), res.getEndDate().getTime())) {
+                return null;
+            }
+        }
+    	
         return reservationRepository.save(reservation);
+    }
+    
+    private boolean between(long i, long minValueInclusive, long maxValueInclusive) {
+        return (i >= minValueInclusive && i <= maxValueInclusive);
     }
     
     @Override
@@ -131,5 +148,10 @@ public class ReservationServiceImpl implements ReservationService {
         return all.stream()
                 .filter(reservation -> reservation.getStartDate().after(date))
                 .collect(Collectors.toList());
+	}
+	
+	@Override
+	public Reservation finOne(Long id) {
+		return reservationRepository.findById(id).get();
 	}
 }

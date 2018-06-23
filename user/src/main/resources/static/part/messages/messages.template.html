@@ -1,11 +1,11 @@
 <div class="flex-column float-right pre-scrollable panel row-md-7" >
-	<a ng-repeat="msg in $ctrl.messages" ng-click="$ctrl.displayMessage($index)">{{msg.sender.email}}</a>
+	<a ng-repeat="msg in $ctrl.messages" ng-click="$ctrl.displayMessage($index)">{{msg.receiver.email}}</a>
 </div>
 
-<div ng-if="$ctrl.message" class="flex-column col-md-7">
+<div ng-if="$ctrl.message" class="flex-column col-md-6">
 	<div class="card text-center bg-secondary">
 		<div class="card-body">
-			{{$ctrl.message.sender.email}}
+			{{$ctrl.message.receiver.email}}
 			<button class="btn btn-custom" ng-click="$ctrl.refresh()"><i class="fa fa-sync"></i></button>
 			<table class="table">
 				<tr>
@@ -15,24 +15,29 @@
 					<th>End date</th>
 				</tr>
 				<tr>
-					<td>{{$ctrl.message.reservation.accommodation.name}}</td>
-					<td>{{$ctrl.message.reservation.accommodation.address}}</td>
+					<td>{{$ctrl.message.reservation.lodging.name}}</td>
+					<td>{{$ctrl.message.reservation.lodging.location}}</td>
 					<td><input class="form-control form-group" type="date" ng-model="$ctrl.startDate" readonly/></td>
 					<td><input class="form-control form-group" type="date" ng-model="$ctrl.endDate" readonly/></td>
 				</tr>
 			</table>
 		</div>
 	</div>
-	<div class="card bg-secondary">
+	
+	
+	<div class="card">
 		<div class="card-body">
 			{{$ctrl.message.content}}
 		</div>
 	</div>
+	
 	<div class="card" ng-repeat="msg in $ctrl.message.messages" ng-class="{'bg-secondary': $root.user.id != msg.sender.id}">
 		<div class="card-body">
 			{{msg.content}}
 		</div>
 	</div>
+	
+	
 	<div class="card ">
 		<div class="card-body">
 			<form name="message">
