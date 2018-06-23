@@ -5,6 +5,9 @@ import com.xml.booking.backendmain.exceptions.BadRequestException;
 import com.xml.booking.backendmain.exceptions.NotFoundException;
 import com.xml.booking.backendmain.lodging.Lodging;
 import com.xml.booking.backendmain.lodging.LodgingRepository;
+import com.xml.booking.backendmain.messages.Message;
+import com.xml.booking.backendmain.messages.MessageRepository;
+import com.xml.booking.backendmain.messages.MessageService;
 import com.xml.booking.backendmain.users.User;
 import com.xml.booking.backendmain.users.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +30,9 @@ public class ReservationServiceImpl implements ReservationService {
         this.reservationRepository = reservationRepository;
         this.lodgingRepository = lodgingRepository;
     }
+    
+    @Autowired
+    private MessageRepository messageRepository;
     
     @Override
     @Transactional(readOnly = false)
@@ -89,6 +95,16 @@ public class ReservationServiceImpl implements ReservationService {
         if (!reservation.getUser().equals(user)) {
             throw new AuthException("User cannot cancel other users reservation");
         }
+        
+        Message msgMaster = messageRepository.findByReservation_IdAndMaster(reservation.getId(), true);
+        if(msgMaster != null) {
+        	for (Message msg : msgMaster.getMessages()) {
+				messageRepository.deleteById(msg.getId());
+			}
+        	messageRepository.deleteById(msgMaster.getId());
+        }
+       
+        
         reservationRepository.delete(reservation);
     }
     
