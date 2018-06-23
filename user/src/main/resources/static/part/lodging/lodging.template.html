@@ -10,6 +10,9 @@
                 <h5>{{lodgingVm.data.current.name}}</h5>
                 <em>{{lodgingVm.data.current.textDescription}}</em>
                 <br>
+                <div ng-repeat="url in lodgingVm.data.current.imageUrls">
+                    <img src="{{url}}" alt="ovde treba slika" width="200" height="200">
+                </div>
                 <em ng-if="lodgingVm.avg">Average rating: {{lodgingVm.avg}}</em>
                 <br>
                 <strong>TYPE:{{lodgingVm.data.current.type.value}}</strong>

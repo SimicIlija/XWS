@@ -35,7 +35,7 @@ public class SearchService {
         List<Lodging> lodgings = lodgingRepository.findByLocationIgnoreCase(searchDto.getPlace());
         List<Lodging> filterNumberOfGuests;
         filterNumberOfGuests = lodgings.stream()
-                .filter(lodging -> lodging.getNumberOfGuests() > searchDto.getNumberOfPeople())
+                .filter(lodging -> lodging.getNumberOfGuests() >= searchDto.getNumberOfPeople())
                 .collect(Collectors.toList());
         List<Lodging> datesFiltered = filterDates(filterNumberOfGuests, searchDto);
         List<Lodging> additional = filterAdditional(datesFiltered, searchDto);

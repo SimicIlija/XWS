@@ -18,6 +18,7 @@
         check();
 
         function check() {
+            console.log(lodgingVm.data);
             if (lodgingVm.data === undefined) {
                 $state.go('error');
             }
@@ -32,10 +33,10 @@
                         .then((response) => {
                             lodgingVm.comments = response;
                         }, (error) => {
-                            console.log(error);
+                            lodgingVm.comments = [];
                         });
                 }, (error) => {
-                    console.log(error);
+                    lodgingVm.avg = 0;
                 });
         }
 

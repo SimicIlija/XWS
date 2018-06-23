@@ -57,7 +57,7 @@
         <th>{{reservation.endDate| date:shortDate}}</th>
 
         <th>
-            <button type="button" ui-sref="home.past_reservation({myObject : reservation})" class="btn btn-link"> 
+            <button type="button" ng-click="reservationVm.redirect(reservation)" class="btn btn-link"> 
                 More info and add rating!
             </button>
         </th>

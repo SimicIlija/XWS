@@ -1,5 +1,6 @@
 package com.xml.booking.backendmain.lodging;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
 import com.xml.booking.backendmain.optionCatalog.Catalog;

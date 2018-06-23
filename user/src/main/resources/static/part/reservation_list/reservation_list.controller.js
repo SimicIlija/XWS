@@ -4,15 +4,16 @@
         .module('reservation_list')
         .controller('reservationController', reservationController);
 
-    reservationController.$inject = ['reservationService', '$stateParams'];
+    reservationController.$inject = ['reservationService', '$stateParams', '$state'];
 
-    function reservationController(reservationService, $stateParams) {
+    function reservationController(reservationService, $stateParams, $state) {
         var reservationVm = this;
         reservationVm.init = init;
         reservationVm.list = [];
         reservationVm.showHistory = showHistory;
         reservationVm.rating = rating;
         reservationVm.cancelReservation = cancelReservation;
+        reservationVm.redirect = redirect;
 
         init();
 
@@ -49,6 +50,12 @@
                 }).catch(response => {
                     console.log(response);
                 });
+        }
+
+        function redirect(reservation) {
+            var myObject = {};
+            myObject = reservation;
+            $state.go('home.past_reservation', { myObject });
         }
     }
 })();

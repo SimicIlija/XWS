@@ -93,7 +93,7 @@
             </th>
             <th>{{lodging.textDescription}}</th>
             <th>
-                <button type="button" ui-sref="home.lodging({myObject : {results : searchVm.results, current : lodging}})" class="btn btn-link"> 
+                <button type="button" ng-click="searchVm.redirect(searchVm.results, lodging)" class="btn btn-link"> 
                     More info and book!
                 </button>
             </th>
