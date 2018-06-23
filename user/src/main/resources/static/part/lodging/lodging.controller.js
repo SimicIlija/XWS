@@ -4,8 +4,8 @@
         .module('lodging')
         .controller('lodgingController', lodgingController);
 
-    lodgingController.$inject = ['$stateParams', '$state', 'reservationService', 'ratingService'];
-    function lodgingController($stateParams, $state, reservationService, ratingService) {
+    lodgingController.$inject = ['$stateParams', '$state', 'reservationService', 'ratingService','$rootScope'];
+    function lodgingController($stateParams, $state, reservationService, ratingService,$rootScope) {
         var lodgingVm = this;
         lodgingVm.data = $stateParams.myObject;
         lodgingVm.avg = null;
@@ -41,6 +41,10 @@
         }
 
         function book() {
+        	if($rootScope.user.blocked){
+        		alert("Can not reserved if blocked");
+        		return;
+        	}
             var dto = {};
             dto.lodgingId = lodgingVm.data.current.id;
             dto.startDate = lodgingVm.data.results.startDate;

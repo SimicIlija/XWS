@@ -6,7 +6,7 @@ import java.util.Date;
 import java.util.List;
 
 public class SearchResultDto {
-    private List<Lodging> lodgings;
+    private List<LodgingDto> lodgings;
 
     private String place;
 
@@ -19,11 +19,11 @@ public class SearchResultDto {
     public SearchResultDto() {
     }
 
-    public List<Lodging> getLodgings() {
+    public List<LodgingDto> getLodgings() {
         return lodgings;
     }
 
-    public void setLodgings(List<Lodging> lodgings) {
+    public void setLodgings(List<LodgingDto> lodgings) {
         this.lodgings = lodgings;
     }
 

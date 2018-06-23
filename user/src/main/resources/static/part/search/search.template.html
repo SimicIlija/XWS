@@ -84,16 +84,22 @@
             <tr>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Rating</th>
+                <th>Price</th>
+                <th>Category</th>
                 <th>Reserve</th>
             </tr>
         </thead>
         <tbody ng-repeat="lodging in searchVm.results.lodgings">
             <th>
-                {{lodging.name}}
+                {{lodging.lodging.name}}
             </th>
-            <th>{{lodging.textDescription}}</th>
+            <th>{{lodging.lodging.textDescription}}</th>
+            <th>{{lodging.avg}}</th>
+            <th>{{lodging.price}}</th>
+            <th>{{lodging.lodging.catagoty.value}}</th>
             <th>
-                <button type="button" ng-click="searchVm.redirect(searchVm.results, lodging)" class="btn btn-link"> 
+                <button type="button" ng-click="searchVm.redirect(searchVm.results, lodging.lodging)" class="btn btn-link"> 
                     More info and book!
                 </button>
             </th>

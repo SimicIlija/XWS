@@ -95,10 +95,10 @@ public class TestData {
 
         List<Catalog> list1 = Arrays.asList(n[0], n[1], n[2]);
         Lodging l1 = new Lodging(user1, c11, c21, list1, "Lodging 1",
-                "Novi Sad", "Opis objekta", 5, Arrays.asList(0.0, 0.0, 0.0, 0.0, 0.0 ,0.0 ,0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+                "Novi Sad", "Opis objekta", 5, Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0 ,6.0 ,7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
         lodgingService.add(l1);
         Lodging l2 = new Lodging(user1, c11, c21, list1, "Lodging 2",
-                "Novi Sad", "Opis objekta", 5, Arrays.asList(0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0));
+                "Novi Sad", "Opis objekta", 5, Arrays.asList(1.0, 2.0, 3.0, 4.0, 5.0 ,6.0 ,7.0, 8.0, 9.0, 10.0, 11.0, 12.0));
         lodgingService.add(l2);
 
         Reservation reservation = new Reservation();
