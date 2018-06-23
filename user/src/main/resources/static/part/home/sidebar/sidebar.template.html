@@ -23,4 +23,13 @@
 				Attendance History
 		</a>
 	</li>
+	
+	<li class="nav-item" ng-if="$root.user">
+		<a class="nav-link"
+			ui-sref="home.messages"
+			ui-sref-active="active">
+				<i class="fas fa-envelope"></i>
+				Messages
+		</a>
+	</li>
 </ul>

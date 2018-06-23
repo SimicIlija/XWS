@@ -27,6 +27,18 @@
             <button type="button" class="btn btn-link" ng-click="reservationVm.cancelReservation(reservation.id)">
                 Cancel reservation
             </button>
+            <button type="button" class="btn btn-link" ng-click="reservationVm.setMessage(reservation.id)">
+                Message
+            </button>
+            <div ng-if="reservationVm.messageForm == reservation.id ">
+	            <form name="message{{reservation.id}}">
+	            	<textarea placeholder="Message" rows="3" class="form-group form-control" ng-model="reservationVm.msgContent" required></textarea>
+	            	<input type="submit" class="btn btn-custom" value="Send" ng-click="reservationVm.sendMessage(reservation.id)"/>
+	            	<p>
+	            		{{reservationVm.status}}
+	            	</p>
+	            </form>
+            </div>
         </th>
         </tbody>
     </table>

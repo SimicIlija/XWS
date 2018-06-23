@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.xml.booking.backendmain.users.User;
 
 @RestController
-@RequestMapping("/rest/message")
+@RequestMapping("/api/message")
 public class MessageController {
 	
 	@Autowired

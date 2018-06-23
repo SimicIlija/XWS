@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.OrderBy;
 import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ import org.hibernate.validator.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonProperty.Access;
+import com.xml.booking.agent.reservation.Reservation;
 import com.xml.booking.agent.user.User;
 
 import backendmain.wsdl.MessageXML;
@@ -50,6 +52,9 @@ public class Message {
 	@ManyToMany
 	@OrderBy("timeStamp")
 	private List<Message> messages;
+	
+	@OneToOne
+	private Reservation reservation;
 
 	public Message() {}
 
@@ -68,6 +73,8 @@ public class Message {
 			this.sender = new User(messageXML.getSender());
 		if(messageXML.getReceiver() != null)
 			this.receiver = new User(messageXML.getReceiver());
+		if(messageXML.getReservation() != null)
+			this.reservation = new Reservation(messageXML.getReservation());
 		this.timeStamp = messageXML.getTimeStamp();
 		this.content = messageXML.getContent();
 		this.master = messageXML.isMaster();
@@ -139,6 +146,14 @@ public class Message {
 
 	public void setMessages(List<Message> messages) {
 		this.messages = messages;
+	}
+
+	public Reservation getReservation() {
+		return reservation;
+	}
+
+	public void setReservation(Reservation reservation) {
+		this.reservation = reservation;
 	}
 	
 }

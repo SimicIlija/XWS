@@ -13,6 +13,7 @@ import com.xml.booking.backendmain.messages.MessageService;
 import com.xml.booking.backendmain.optionCatalog.Catalog;
 import com.xml.booking.backendmain.optionCatalog.CatalogService;
 import com.xml.booking.backendmain.reservations.Reservation;
+import com.xml.booking.backendmain.reservations.ReservationService;
 import com.xml.booking.backendmain.users.User;
 import com.xml.booking.backendmain.users.UserService;
 import com.xml.booking.backendmain.ws_classes.AccommodationXML;
@@ -34,6 +35,8 @@ public class ConverterXML {
 	private LodgingService lodgingService;
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private ReservationService reservationService;
 	
 	public UserXML userToUserXML(User user) {
 		if(user != null) {
@@ -107,6 +110,7 @@ public class ConverterXML {
 			ret.setContent(message.getContent());
 			ret.setMaster(message.getMaster());
 			ret.setTimeStamp(message.getTimeStamp());
+			ret.setReservation(reservationToReservationXML(message.getReservation()));
 			for(Message message2 : message.getMessages())
 				ret.getMessages().add(messageToMessageXML(message2));
 			return ret;
@@ -159,6 +163,8 @@ public class ConverterXML {
 				message.setSender(userService.findOne(messageXML.getSender().getId()));
 			if(messageXML.getReceiver() != null)
 				message.setReceiver(userService.findOne(messageXML.getReceiver().getId()));
+			if(messageXML.getReservation()!= null)
+				message.setReservation(reservationService.finOne(messageXML.getReservation().getId()));
 			message.setContent(messageXML.getContent());
 			message.setTimeStamp(messageXML.getTimeStamp());
 			message.setMaster(messageXML.isMaster());

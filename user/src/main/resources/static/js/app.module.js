@@ -3,6 +3,7 @@
 angular.module('booking-admin', [
 	'ui.router',
 	'home',
-	'core.user',
-	'header'
+	'core',
+	'header',
+	'messages'
 ]);
