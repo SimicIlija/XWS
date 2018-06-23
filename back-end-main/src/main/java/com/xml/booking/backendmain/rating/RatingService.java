@@ -170,4 +170,24 @@ public class RatingService {
             throw new NotFoundException("Cloud error");
         }
     }
+
+    public List<ResultLodging> filter(int rating) {
+        String url = "https://us-central1-xml-cloud-206017.cloudfunctions.net/filterRating";
+        RestTemplate restTemplate = new RestTemplate();
+        FilterDto filterDto = new FilterDto();
+        filterDto.setAvRate(rating);
+        HttpEntity<FilterDto> request = new HttpEntity<>(filterDto);
+        try {
+            ResponseEntity<List<ResultLodging>> response = restTemplate.exchange(
+                    url,
+                    HttpMethod.POST,
+                    request,
+                    new ParameterizedTypeReference<List<ResultLodging>>() {
+                    });
+            List<ResultLodging> res = response.getBody();
+            return res;
+        } catch (Exception e) {
+            throw new NotFoundException("Cloud error");
+        }
+    }
 }

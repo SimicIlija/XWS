@@ -3,7 +3,9 @@ package com.xml.booking.backendmain.search;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SearchDto {
 
@@ -20,7 +22,16 @@ public class SearchDto {
     @Min(1)
     private Integer numberOfPeople;
 
+    private int rating;
+
+    private String type;
+
+    private String category;
+
+    private List<String> additionalServices;
+
     public SearchDto() {
+        additionalServices = new ArrayList<>();
     }
 
     public String getPlace() {
@@ -55,6 +66,42 @@ public class SearchDto {
         this.numberOfPeople = numberOfPeople;
     }
 
+    public int getRating() {
+        return rating;
+    }
+
+    public void setRating(int rating) {
+        this.rating = rating;
+    }
+
+    public void setNumberOfPeople(Integer numberOfPeople) {
+        this.numberOfPeople = numberOfPeople;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public List<String> getAdditionalServices() {
+        return additionalServices;
+    }
+
+    public void setAdditionalServices(List<String> additionalServices) {
+        this.additionalServices = additionalServices;
+    }
+
     public boolean checkDates() {
         return endDate.after(startDate);
     }
@@ -67,4 +114,6 @@ public class SearchDto {
         searchResultDto.setNumberOfPeople(numberOfPeople);
         return searchResultDto;
     }
+
+
 }

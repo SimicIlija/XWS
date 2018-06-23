@@ -30,7 +30,7 @@
             });
 
         function search() {
-
+            console.log(searchVm.dto);
 
             let bool = verifyData();
             if (!bool) {
