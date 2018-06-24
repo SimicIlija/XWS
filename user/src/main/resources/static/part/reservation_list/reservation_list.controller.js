@@ -5,10 +5,10 @@
         .controller('reservationController', reservationController);
 
 
-    reservationController.$inject = ['reservationService', 'MessageService', '$stateParams'];
+    reservationController.$inject = ['reservationService', 'MessageService', '$stateParams', '$state'];
 
 
-    function reservationController(reservationService, MessageService, $stateParams) {
+    function reservationController(reservationService, MessageService, $stateParams, $state) {
         var reservationVm = this;
         reservationVm.init = init;
         reservationVm.list = [];
@@ -20,6 +20,7 @@
         reservationVm.sendMessage = sendMessage;
         reservationVm.status = null;
         reservationVm.msgContent = null;
+        reservationVm.redirect = redirect;
 
         init();
 
