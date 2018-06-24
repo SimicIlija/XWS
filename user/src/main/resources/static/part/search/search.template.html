@@ -78,6 +78,15 @@
             Available lodgings in {{searchVm.results.place | uppercase}} in period between {{searchVm.results.startDate | date:shortDate}}
             and {{searchVm.results.endDate | date:shortDate}}:
         </h3>
+        <select name="sortSelect" id="sortSel" ng-model="searchVm.sortCrit" >
+            <option value="1">Rating</option>
+            <option value="2">Price</option>
+            <option value="3">Category</option>
+        </select>
+
+        <button  class="btn btn-outline-primary" ng-click="searchVm.sortiraj()">
+            Sort
+        </button>
     </div>
     <table class="table table-bordered table-hover">
         <thead>

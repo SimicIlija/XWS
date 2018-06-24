@@ -15,13 +15,17 @@
         searchVm.dto.startDate = new Date();
         searchVm.dto.endDate = new Date();
         searchVm.errorMessage = '';
+        searchVm.sortCrit = "1";
+        searchVm.catalogs = [];
         searchVm.search = search;
         searchVm.errorHappened = errorHappened;
         searchVm.showResults = showResults;
         searchVm.reserve = reserve;
         searchVm.loggedIn = loggedIn;
         searchVm.redirect = redirect;
-        searchVm.catalogs = [];
+        searchVm.sortiraj = sortiraj;
+
+
 
         CatalogService.getAll()
             .then((response) => {
@@ -105,6 +109,31 @@
             myObject.current = lodging;
             console.log(myObject);
             $state.go('home.lodging', {myObject});
+        }
+        
+        function sortiraj() {
+            if(searchVm.sortCrit == "1"){
+                searchVm.results.lodgings.sort(propComparator("avg"));
+                return;
+            }
+            if(searchVm.sortCrit == "2"){
+                searchVm.results.lodgings.sort(propComparator("price"));
+                return;
+            }
+            if(searchVm.sortCrit == "3"){
+                searchVm.results.lodgings.sort(propComparator("price"));
+                return;
+            }
+        }
+
+        function propComparator(prop) {
+            return function(c1, c2) {
+                    if (c1[prop] < c2[prop])
+                        return 1;
+                    if (c1[prop] > c2[prop])
+                        return -1;
+                    return 0;
+            };
         }
     }
 })();
