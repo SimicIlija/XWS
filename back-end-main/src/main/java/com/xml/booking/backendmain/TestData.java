@@ -126,6 +126,20 @@ public class TestData {
         reservation2.setEndDate(new Date());
         reservationService.addNew(reservation2);
         
+        Reservation reservation3 = new Reservation();
+        reservation3.setLodging(l1);
+        reservation3.setUser(user2);
+        Calendar cal3 = Calendar.getInstance();
+        cal3.set(Calendar.MONTH, Calendar.JANUARY);
+        cal3.set(Calendar.HOUR_OF_DAY, 0);
+        cal3.set(Calendar.MINUTE, 0);
+        cal3.set(Calendar.SECOND, 0);
+        cal3.set(Calendar.MILLISECOND, 0);
+        reservation3.setStartDate(cal3.getTime());
+        cal3.add(Calendar.DATE, 5);
+        reservation3.setEndDate(cal3.getTime());
+        reservationService.addNew(reservation3);
+        
         
 //        Message msg1 = new Message(user2, user1, System.currentTimeMillis(), "Pitanje bla bla bla", true, null);
 //        msg1.setReservation(reservation);
